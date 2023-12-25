@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shared Files">
+      <UniqueIdentifier>{bd06549e-838f-403e-885e-9a6902e44ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\camera">
+      <UniqueIdentifier>{46179ba0-fb16-49b5-bd07-b6eb1f04c269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\utils">
+      <UniqueIdentifier>{76f4d509-ba71-4417-b9d0-c0d076b23788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\math">
+      <UniqueIdentifier>{a74f0efc-638c-449f-b948-429173af5a52}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\utils\thread.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\camera\camera.cpp">
+      <Filter>Shared Files\camera</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shared\utils\event.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\exception.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\singleton.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\thread.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\utils.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\camera\camera.h">
+      <Filter>Shared Files\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\acc.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\map.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\peaks.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\vector.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

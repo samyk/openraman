@@ -1,0 +1,332 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// French (France) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // French (France) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// French (Belgium) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRB)
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH_BELGIAN
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "icon1.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "bitmap1.bmp"
+
+IDB_SPLASH              BITMAP                  "splashscreen.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CAM_CONFIG DIALOGEX 0, 0, 245, 401
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Configuration Panel"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Exposure:",IDC_SZ_EXPOSURE,12,24,42,18
+    CONTROL         "",IDC_EXPOSURE_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,53,24,114,15
+    RTEXT           "",IDC_EXPOSURE_EDIT,173,24,54,12
+    LTEXT           "Gain:",IDC_SZ_GAIN,12,43,42,18
+    CONTROL         "",IDC_GAIN_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,53,42,138,15
+    RTEXT           "",IDC_GAIN_EDIT,192,44,34,12
+    LTEXT           "Boxcar Smoothing:",IDC_SZ_SMOOTHING,13,220,67,18
+    CONTROL         "",IDC_SMOOTHING_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,88,219,115,15
+    RTEXT           "",IDC_SMOOTHING_EDIT,208,220,18,12
+    LTEXT           "Num Avg.:",IDC_SZ_AVERAGE,12,79,42,18
+    CONTROL         "",IDC_AVERAGE_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,53,78,150,15
+    RTEXT           "",IDC_AVERAGE_EDIT,209,79,17,12
+    CONTROL         "Enable Median Filtering",IDC_MEDFILT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,97,108,18
+    CONTROL         "Automatically log acquired spectra on disk",IDC_LOG,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,13,137,159,17
+    LTEXT           "C:/",IDC_LOG_PATH,13,154,215,18,SS_CENTERIMAGE
+    PUSHBUTTON      "Browse",IDC_BROWSE,179,139,50,14
+    GROUPBOX        "Acquisition Properties",IDC_CAMERA_GROUP,7,7,229,113
+    GROUPBOX        "Logging",IDC_LOG_GROUP,7,126,229,72
+    GROUPBOX        "Plot Settings",IDC_PLOT_GROUP,7,206,229,188
+    LTEXT           "Show plot axis as:",IDC_SZ_AXIS,13,241,72,12
+    COMBOBOX        IDC_AXIS_TYPE,91,238,138,71,CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "ROI:",IDC_SZ_ROI,12,61,42,18
+    CONTROL         "",IDC_ROI_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,53,60,138,15
+    RTEXT           "",IDC_ROI_EDIT,192,61,34,12
+    CONTROL         "Enable Baseline Removal (Schulze et al. Algorithm)",IDC_BASELINE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,295,217,18
+    LTEXT           "Raman Wavelength:",IDC_SZ_RAMAN,23,262,68,12
+    LTEXT           "nm",IDC_SZ2_RAMAN,194,261,34,12
+    CONTROL         "Enable Savitzky-Golay Filtering (post process)",IDC_SGOLAY,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,313,217,18
+    LTEXT           "Window size:",IDC_SZ_SGOLAY_WINDOW,24,335,60,18
+    CONTROL         "",IDC_SGOLAY_WINDOW_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,84,333,108,15
+    LTEXT           "",IDC_SGOLAY_WINDOW_EDIT,198,335,36,12
+    LTEXT           "Polynom order:",IDC_SZ_SGOLAY_ORDER,24,353,60,18
+    CONTROL         "",IDC_SGOLAY_ORDER_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,84,351,108,15
+    LTEXT           "",IDC_SGOLAY_ORDER_EDIT,198,353,36,12
+    LTEXT           "Derivative order:",IDC_SZ_SGOLAY_DERIV,24,372,60,18
+    CONTROL         "",IDC_SGOLAY_DERIV_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,84,369,108,15
+    LTEXT           "",IDC_SGOLAY_DERIV_EDIT,198,372,36,12
+    LTEXT           "Save data as:",IDC_SZ_LOGFORMAT,13,177,72,12
+    COMBOBOX        IDC_LOGFORMAT,90,174,138,71,CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Enable Blank Removal",IDC_BLANK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,277,217,18
+    CONTROL         "",IDC_RAMAN_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | WS_TABSTOP,98,260,87,15
+END
+
+IDD_CAMERA DIALOGEX 0, 0, 317, 28
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Camera"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Connect",IDC_OK,258,7,50,14
+    COMBOBOX        IDC_CAMERA,7,7,244,30,CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_HELP DIALOGEX 0, 0, 205, 68
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CTEXT           "",IDC_SZ_STRING,7,7,191,54
+END
+
+IDD_ACQUISITION DIALOGEX 0, 0, 165, 61
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Acquisition"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Abort",IDC_ABORT,55,40,50,14
+    CTEXT           "Image 0/1",IDC_SZ_PROGRESS,7,7,149,17,SS_CENTERIMAGE
+    CONTROL         "",IDC_PROGRESS,"msctls_progress32",PBS_SMOOTH | WS_BORDER,7,25,151,6
+END
+
+IDD_IMSAVE DIALOGEX 0, 0, 295, 33
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Save Image"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Save",IDC_CONFIRM_SAVE,238,9,50,14
+    LTEXT           "Plot Title:",IDC_STATIC,7,11,38,14
+    EDITTEXT        IDC_PLOT_TITLE,48,9,179,14,ES_AUTOHSCROLL
+END
+
+IDD_CALIBRATE DIALOGEX 0, 0, 201, 269
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Calibration"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Algorithm Parameters",IDC_ALGPARAMS_GROUP,7,63,187,120
+    PUSHBUTTON      "Reset",IDC_RESET,144,225,50,14
+    CTEXT           "",IDC_SZ_CALIBRATION_STATUS,7,201,187,18,SS_CENTERIMAGE | WS_BORDER,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Abort",IDC_ABORT,77,225,50,14
+    PUSHBUTTON      "Calibrate!",IDC_CALIBRATE,7,225,50,14
+    LTEXT           "Source Type:",IDC_SZ_SOURCE,7,7,48,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_SOURCE,55,7,138,60,CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Num Peaks:",IDC_SZ_NUMPEAKS,7,25,48,12,SS_CENTERIMAGE
+    CONTROL         "",IDC_NUMPEAKS_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,55,25,114,12
+    RTEXT           "N/A",IDC_SZ_NUMPEAKS_VAL,169,25,24,12,SS_CENTERIMAGE
+    LTEXT           "Sensitivity:",IDC_SZ_SENSITIVITY,7,42,48,12,SS_CENTERIMAGE
+    CONTROL         "",IDC_SENSITIVITY_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,55,42,114,12
+    RTEXT           "N/A",IDC_SZ_SENSITIVITY_VAL,169,42,24,12,SS_CENTERIMAGE
+    LTEXT           "Model Type:",IDC_SZ_MODEL,14,78,60,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_MODEL,86,79,102,58,CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "(Min)",IDC_SZ_MIN,92,116,18,8
+    CTEXT           "(Max)",IDC_SZ_MAX,146,116,18,8
+    LTEXT           "Maximum Disortion:",IDC_SZ_DISTORTION,14,164,66,12,SS_CENTERIMAGE
+    LTEXT           "nm",IDC_SZ_DISTORTION_MAX,176,164,12,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_MAX_DISTORTION,140,164,28,14,ES_AUTOHSCROLL
+    LTEXT           "Minimum Span:",IDC_SZ_SPAN,14,147,66,12,SS_CENTERIMAGE
+    LTEXT           "nm",IDC_SZ_SPAN_MIN,122,147,18,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_MIN_SPAN,86,147,28,14,ES_AUTOHSCROLL
+    LTEXT           "Wavelength Range:",IDC_SZ_WAVELENGTH,14,129,66,12,SS_CENTERIMAGE
+    LTEXT           "nm",IDC_SZ_WAVELENGTH_MIN,122,129,18,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_MIN_WAVELENGTH,86,129,28,14,ES_AUTOHSCROLL
+    LTEXT           "nm",IDC_SZ_WAVELENGTH_MAX,176,129,12,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_MAX_WAVELENGTH,140,129,28,14,ES_AUTOHSCROLL
+    LTEXT           "nm",IDC_SZ_SPAN_MAX,176,147,12,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_MAX_SPAN,140,147,28,14,ES_AUTOHSCROLL
+    LTEXT           "nm",IDC_SZ_DISTORTION_MIN,122,164,12,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_MIN_DISTORTION,86,164,28,14,ES_AUTOHSCROLL
+    LTEXT           "Sampling:",IDC_SZ_SAMPLING,14,97,60,12,SS_CENTERIMAGE
+    CONTROL         "",IDC_SAMPLING_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,86,97,84,12
+    RTEXT           "N/A",IDC_SZ_SAMPLING_VAL,170,97,18,12,SS_CENTERIMAGE
+    CONTROL         "",IDC_CALIBRATION_PROGRESS,"msctls_progress32",PBS_SMOOTH | WS_BORDER,8,189,186,6
+    PUSHBUTTON      "Import from file",IDC_IMPORT_CALIBRATION,7,248,84,14
+    PUSHBUTTON      "Upload to Camera",IDC_UPLOAD_CALIBRATION,110,248,84,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_CAM_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 236
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 394
+    END
+
+    IDD_CAMERA, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 308
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 21
+    END
+
+    IDD_HELP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 198
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 61
+    END
+
+    IDD_ACQUISITION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 158
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 54
+    END
+
+    IDD_IMSAVE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 288
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 26
+    END
+
+    IDD_CALIBRATE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 194
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 262
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_CAM_CONFIG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CAMERA AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_HELP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ACQUISITION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_IMSAVE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CALIBRATE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RCDATA
+//
+
+#endif    // French (Belgium) resources
+/////////////////////////////////////////////////////////////////////////////
+
+IDR_ICONS             RCDATA                  "toolbar.iis"
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

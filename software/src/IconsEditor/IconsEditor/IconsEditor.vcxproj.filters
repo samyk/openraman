@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shared Files">
+      <UniqueIdentifier>{ba683d78-30a8-42ea-99cb-5f0e85ae45f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\storage">
+      <UniqueIdentifier>{62808dc6-7e19-4bc7-8a93-7b62ef6f8b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\utils">
+      <UniqueIdentifier>{f399103e-7d1e-4d3d-845e-8d41374f17fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\gui">
+      <UniqueIdentifier>{8b3dfabf-e796-418c-ac18-2866e1e4d839}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\storage\storage.cpp">
+      <Filter>Shared Files\storage</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\utils\thread.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\gui\dialogs.cpp">
+      <Filter>Shared Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\gui\icons.cpp">
+      <Filter>Shared Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="depwalker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shared\storage\dynamic_var.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\encode.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\registry.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\rle0.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\rle8.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\stdext.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storage.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storage_buffer.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storage_file.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storage_object.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storeable_object.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\event.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\exception.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\flags.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\notify.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\singleton.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\thread.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\utils.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\axis.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\brush.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\dialogs.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\font.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\gdiobject.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\gui.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\icons.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\marker.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\pen.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\plot.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\property.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\signal.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\text.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iconseditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="listview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="depwalker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shared Folder">
+      <UniqueIdentifier>{70fb9997-3e54-4436-8c3d-24b3dfb7074e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Folder\utils">
+      <UniqueIdentifier>{7b085e11-95be-45ac-88bc-f47d8717127f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Folder\gui">
+      <UniqueIdentifier>{b96420c5-0685-404f-8e9e-e73929cd0351}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\gui\dialogs.cpp">
+      <Filter>Shared Folder\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\gui\icons.cpp">
+      <Filter>Shared Folder\gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shared\utils\exception.h">
+      <Filter>Shared Folder\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\notify.h">
+      <Filter>Shared Folder\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\utils.h">
+      <Filter>Shared Folder\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\dialogs.h">
+      <Filter>Shared Folder\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\icons.h">
+      <Filter>Shared Folder\gui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

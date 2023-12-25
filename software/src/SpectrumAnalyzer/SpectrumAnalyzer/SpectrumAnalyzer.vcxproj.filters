@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shared Files">
+      <UniqueIdentifier>{44fc3573-b9fd-41b4-bda3-a38ca188f543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\utils">
+      <UniqueIdentifier>{70bf95ec-1724-471e-b0c8-cc91fcb2b75c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\gui">
+      <UniqueIdentifier>{7d5716d7-6c74-4c87-a4c1-35645d6e6606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\camera">
+      <UniqueIdentifier>{721d9193-9c5d-44ce-82cc-b01797029c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\math">
+      <UniqueIdentifier>{77ca266e-94e1-4cb0-90e6-2ccec892a4a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared Files\storage">
+      <UniqueIdentifier>{14ed817d-04f1-48a6-a9d0-4c60c71ecc70}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\gui\dialogs.cpp">
+      <Filter>Shared Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\utils\thread.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\camera\camera.cpp">
+      <Filter>Shared Files\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\storage\storage.cpp">
+      <Filter>Shared Files\storage</Filter>
+    </ClCompile>
+    <ClCompile Include="camconfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calibrate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\gui\icons.cpp">
+      <Filter>Shared Files\gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bitmap2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="splashscreen.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shared\gui\axis.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\brush.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\dialogs.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\font.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\gdiobject.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\gui.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\pen.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\plot.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\property.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\signal.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\text.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\event.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\exception.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\singleton.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\thread.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\utils.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="acquisition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="camconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="camselect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="help.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imsave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\camera\camera.h">
+      <Filter>Shared Files\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\notify.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="camdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="filedata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="udata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\acc.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\map.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\peaks.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\vector.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\marker.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\baseline.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\calibration.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\legendre.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\binomial.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\optfuncs.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\power.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\interp.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="calibrate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\flags.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\registry.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\matrix.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\math\sgolay.h">
+      <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\stdext.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storage.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storage_buffer.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storage_file.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storage_object.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\storeable_object.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\dynamic_var.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\encode.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\rle0.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\storage\rle8.h">
+      <Filter>Shared Files\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\gui\icons.h">
+      <Filter>Shared Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\safe.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rcdata1.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
