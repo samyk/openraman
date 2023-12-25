@@ -16,7 +16,7 @@ I am not the author of the project but wanted a way to track and contribute upda
   - [liquid (standard) cuvette](cuvettes/liquid) - from [rev1 zip](https://www.thepulsar.be/files/standard-cuvette-rev1.zip) from [standard cuvette page](https://www.open-raman.org/build/cuvettes/standard-cuvette/)
   - [solid cuvette](cuvettes/solid) - from [rev0 zip](https://www.thepulsar.be/files/solid%20cuvette%20rev0.zip) from [solid cuvette page](https://www.open-raman.org/build/cuvettes/solid-cuvette/)
 
-- [images](images) - images from my own build, based off the performance edition optical components in a breadboarded form factor
+- [images](images) - my own build based off the performance optical components in breadboard form factor
 [![Raman spectrometer (uncovered)](images/raman1.jpg)](images/raman1.jpg)
 [![Raman spectrometer on (uncovered)](images/raman2.jpg)](images/raman2.jpg)
 [![Raman acetone spectrum](images/ramanacetone.png)](images/ramanacetone.png)
