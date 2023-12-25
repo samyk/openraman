@@ -153,7 +153,7 @@ public:
 		fopen_s(&pFile, rFilename.c_str(), "rb");
 
 		if (pFile == nullptr)
-			throw FileOpenException(rFilename);
+			throwException(FileOpenException, rFilename);
 
 		// get file size
 		fseek(pFile, 0, SEEK_END);
@@ -167,7 +167,7 @@ public:
 		{
 			fclose(pFile);
 
-			throw MemoryAllocationException(nSize);
+			throwException(MemoryAllocationException, nSize);
 		}
 
 		// assign size
@@ -179,7 +179,7 @@ public:
 			fclose(pFile);
 			clear();
 
-			throw FileReadException(rFilename, nSize);
+			throwException(FileReadException, rFilename, nSize);
 		}
 
 		// close file
@@ -194,7 +194,7 @@ public:
 
 		// load from registry
 		if (!loadBinaryFromRegistry(eRootKey, pszRegistryKey, pszValueName, this->m_pData, this->m_nSize))
-			throw RegistryAccessException();
+			throwException(RegistryAccessException);
 	}
 
 	// copy operator
@@ -216,7 +216,7 @@ public:
 		this->m_pData = (unsigned char*)realloc(this->m_pData, nNewSize);
 
 		if (this->m_pData == nullptr)
-			throw MemoryAllocationException(nNewSize);
+			throwException(MemoryAllocationException, nNewSize);
 
 		memset(__ADDRESS(this->m_pData, this->m_nSize), 0, nSize);
 
@@ -236,10 +236,10 @@ public:
 	template<typename Type> Type* ptr(size_t nOffset, size_t nCheckSize=0)
 	{
 		if (nOffset >= this->m_nSize)
-			throw InvalidOffsetException();
+			throwException(InvalidOffsetException);
 
 		if (__ADD(nOffset, nCheckSize) > this->m_nSize)
-			throw TypeFitException();
+			throwException(TypeFitException);
 
 		return (Type*)__ADDRESS(data(), nOffset);
 	}
@@ -248,10 +248,10 @@ public:
 	template<typename Type> const Type* ptr(size_t nOffset, size_t nCheckSize = 0) const
 	{
 		if (nOffset >= this->m_nSize && nCheckSize != 0)
-			throw InvalidOffsetException();
+			throwException(InvalidOffsetException);
 
 		if (__ADD(nOffset, nCheckSize) > this->m_nSize)
-			throw TypeFitException();
+			throwException(TypeFitException);
 
 		return (const Type*)__ADDRESS(data(), nOffset);
 	}
@@ -277,7 +277,7 @@ public:
 		this->m_pData = (unsigned char*)realloc(this->m_pData, nNewSize);
 
 		if (this->m_pData == nullptr)
-			throw MemoryAllocationException(nNewSize);
+			throwException(MemoryAllocationException, nNewSize);
 
 		memcpy(__ADDRESS(this->m_pData, this->m_nSize), pBytes, nSize);
 
@@ -408,24 +408,24 @@ static StorageBuffer loadBufferFromRegistry(RegistryRootKey eRootKey, const char
 	return buffer;
 }
 
+// UnknownResourceException exception class
+class UnknownResourceException : public IException
+{
+public:
+	virtual std::string toString(void) const override
+	{
+		return "Unknown Resource!";
+	}
+};
+
 // load storage buffer from resource
 static StorageBuffer loadBufferFromResource(int iResourceID, HMODULE hModule=NULL)
 {
-	// UnknownResourceException exception class
-	class UnknownResourceException : public IException
-	{
-	public:
-		virtual std::string toString(void) const override
-		{
-			return "Unknown Resource!";
-		}
-	};
-
 	// find resource inside current module
 	auto hResource = FindResource(hModule, MAKEINTRESOURCE(iResourceID), RT_RCDATA);
 
 	if (hResource == NULL)
-		throw UnknownResourceException();
+		throwException(UnknownResourceException);
 
 	// get resource size
 	size_t nSize = SizeofResource(hModule, hResource);
@@ -434,13 +434,13 @@ static StorageBuffer loadBufferFromResource(int iResourceID, HMODULE hModule=NUL
 	auto hGlobal = LoadResource(hModule, hResource);
 
 	if (hGlobal == NULL)
-		throw UnknownResourceException();
+		throwException(UnknownResourceException);
 
 	// lock resource
 	auto pData = LockResource(hGlobal);
 
 	if (pData == NULL)
-		throw UnknownResourceException();
+		throwException(UnknownResourceException);
 
 	try
 	{

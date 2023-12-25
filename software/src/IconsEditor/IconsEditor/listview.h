@@ -174,7 +174,7 @@ public:
         }
 
         // throw exception if nothing return
-        throw NoSelectionException();
+        throwException(NoSelectionException);
     }
 
     // select specific item, return true when succesful

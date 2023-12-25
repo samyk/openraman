@@ -52,7 +52,7 @@ static vector_t getCalibrationData(CalibrationData eCalibrationData)
         return { 253.65, 296.73, 302.15, 313.16, 334.15, 365.01, 404.66, 435.84, 546.08, 576.96, 579.07, 696.54, 738.40, 750.39, 763.51, 772.40, 794.82, 800.62, 811.53, 826.45, 842.46, 912.30 };
 
     default:
-        throw UnknownCalibrationData();
+		throwException(UnknownCalibrationData);
     }
 }
 

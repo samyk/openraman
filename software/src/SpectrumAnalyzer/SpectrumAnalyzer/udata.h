@@ -35,7 +35,7 @@ public:
         fopen_s(&pFile, pszFilename, "rb");
 
         if (pFile == nullptr)
-            throw FileNotFoundException(pszFilename);
+            throwException(FileNotFoundException, pszFilename);
 
         // lambda to tokenize a line from the file
         auto getline = [](FILE* pFile)
@@ -61,7 +61,7 @@ public:
         {
             fclose(pFile);
 
-            throw EmptyFileException(pszFilename);
+            throwException(EmptyFileException, pszFilename);
         }
 
         // get first line (header)
@@ -75,7 +75,7 @@ public:
         {
             fclose(pFile);
 
-            throw WrongFileTypeException(pszFilename);
+            throwException(WrongFileTypeException, pszFilename);
         }
 
         // read all lines

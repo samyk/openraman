@@ -180,7 +180,7 @@ template<size_t N> std::array<double, N> fminsearch(std::function< double(const 
 
 	// check size
 	if (N == 0)
-		throw InvalidVectorException();
+		throwException(InvalidVectorException);
 
 	// follow Matlab conventions
 	if (nMaxIterations == 0)

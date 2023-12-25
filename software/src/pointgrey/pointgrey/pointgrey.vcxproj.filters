@@ -36,6 +36,12 @@
     <ClCompile Include="shared\camera\camera.cpp">
       <Filter>Shared Files\camera</Filter>
     </ClCompile>
+    <ClCompile Include="shared\utils\evemon.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\utils\exception.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shared\utils\event.h">
@@ -79,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="shared\math\vector.h">
       <Filter>Shared Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\evemon.h">
+      <Filter>Shared Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

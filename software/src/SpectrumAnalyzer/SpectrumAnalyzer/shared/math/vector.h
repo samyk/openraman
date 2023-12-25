@@ -100,7 +100,7 @@ static auto operator+(const vector_t& vec1, const vector_t& vec2)
 
 	// throw error is vector are not the same size
 	if (vec1.size() != vec2.size())
-		throw InvalidSizeException();
+		throwException(InvalidSizeException);
 
 	vector_t ret(vec1.size());
 
@@ -152,7 +152,7 @@ static auto operator-(const vector_t& vec1, const vector_t& vec2)
 
 	// throw error is vector are not the same size
 	if (vec1.size() != vec2.size())
-		throw InvalidSizeException();
+		throwException(InvalidSizeException);
 
 	vector_t ret(vec1.size());
 
@@ -207,7 +207,7 @@ static const vector_t& operator+=(vector_t& vec1, const vector_t& vec2)
 	{
 		// throw error if vectors are not the same size
 		if (vec1.size() != vec2.size())
-			throw InvalidSizeException();
+			throwException(InvalidSizeException);
 
 		// add each element
 		for (size_t i = 0; i < vec1.size(); i++)
@@ -233,7 +233,7 @@ static const vector_t& operator-=(vector_t& vec1, const vector_t& vec2)
 	{
 		// throw error if vectors are not the same size
 		if (vec1.size() != vec2.size())
-			throw InvalidSizeException();
+			throwException(InvalidSizeException);
 
 		// subtract each elements
 		for (size_t i = 0; i < vec1.size(); i++)
@@ -248,7 +248,7 @@ static auto linspace(double fMin, double fMax, size_t nSize)
 {
 	// require at least 2 elements
 	if (nSize <= 1)
-		throw InvalidSizeException();
+		throwException(InvalidSizeException);
 
 	// return linear interpolation
 	vector_t ret(nSize);
@@ -268,7 +268,7 @@ static double maxof(const vector_t& rArray)
 {
 	// throw exception if size is null
 	if (rArray.size() == 0)
-		throw InvalidSizeException();
+		throwException(InvalidSizeException);
 
 	// get maximum
 	double fRet = rArray[0];
@@ -308,7 +308,7 @@ static auto maxvec(const vector_t& vec1, const vector_t& vec2)
 
 	// throw error is vector are not the same size
 	if (vec1.size() != vec2.size())
-		throw InvalidSizeException();
+		throwException(InvalidSizeException);
 
 	vector_t ret(vec1.size());
 
@@ -331,7 +331,7 @@ static auto minvec(const vector_t& vec1, const vector_t& vec2)
 
 	// throw error is vector are not the same size
 	if (vec1.size() != vec2.size())
-		throw InvalidSizeException();
+		throwException(InvalidSizeException);
 
 	vector_t ret(vec1.size());
 
@@ -408,7 +408,7 @@ static auto sum(const vector_t& vec)
 static auto mean(const vector_t& vec)
 {
 	if (vec.size() == 0)
-		throw InvalidSizeException();
+		throwException(InvalidSizeException);
 
 	return sum(vec) / vec.size();
 }

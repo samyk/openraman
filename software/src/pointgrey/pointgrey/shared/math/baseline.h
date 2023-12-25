@@ -83,7 +83,7 @@ static vector_t baseline_schulze(const vector_t& vec)
 		i++;
 	}
 
-	throw NoBaselineFoundException();
+	throwException(NoBaselineFoundException);
 }
 
 // generic baseline removal dispatch
@@ -95,6 +95,6 @@ static vector_t baseline(const vector_t& vec, BaselineRemovalAlgorithm eAlgorith
 		return baseline_schulze(vec);
 
 	default:
-		throw NoBaselineFoundException();
+		throwException(NoBaselineFoundException);
 	}
 }

@@ -20,6 +20,7 @@
 #include <ShlObj.h>
 
 #include "../utils/exception.h"
+#include "../utils/evemon.h"
 #include "../storage/storage.h"
 
 // IconNotFoundException exception class
@@ -77,6 +78,7 @@ enum class IconSize
     _24x24,
     _32x32,
     _48x48,
+    _8x8,
 };
 
 // imported icon class
@@ -220,9 +222,11 @@ private:
 
         ExpandEnvironmentStringsA(this->m_file.c_str(), szPath, sizeof(szPath));
 
+        _debug("importing icon %d from file %s", this->m_iIndex, szPath);
+
         // extract icon
         if (SHDefExtractIconA(szPath, -this->m_iIndex, 0, &this->m_hIcon, NULL, (UINT)(this->m_nSize & 0xffff)) != S_OK)
-            throw IconNotFoundException();
+            throwException(IconNotFoundException);
     }
 
     // clear icon
@@ -305,7 +309,7 @@ public:
         StorageObject* pObject = rContainer.get("", "icons");
 
         if (pObject == nullptr)
-            throw IconSetNotFoundException();
+            throwException(IconSetNotFoundException);
 
         pop(*pObject);
     }
@@ -338,11 +342,20 @@ public:
         this->m_list.erase(rLabel);
     }
 
+    // return icon size enum
+    auto getIconSizeEnum(void) const
+    {
+        return this->m_eIconSize;
+    }
+
     // return icon size
     size_t getIconSize(void) const
     {
         switch (this->m_eIconSize)
         {
+        case IconSize::_8x8:
+            return 8;
+
         case IconSize::_16x16:
             return 16;
 
@@ -402,7 +415,7 @@ public:
     {
         // throw exception if not found
         if (!hasIcon(rName))
-            throw IconNotInListException(rName);
+            throwException(IconNotInListException, rName);
 
         // return object
         return this->m_list[rName];
@@ -413,7 +426,7 @@ public:
     {
         // throw exception if not found
         if (!hasIcon(rName))
-            throw IconNotInListException(rName);
+            throwException(IconNotInListException, rName);
 
         // return HICON
         return this->m_list.find(rName)->second.getIcon();
@@ -446,7 +459,7 @@ public:
 
         // check typename
         if (rContainer.getTypeName() != getClassName())
-            throw WrongTypeException();
+            throwException(WrongTypeException);
 
         // get all children
         auto children = rContainer.getChildren();
@@ -456,7 +469,11 @@ public:
             ImportedIcon icon;
             icon.pop(*v);
 
-            this->m_list.emplace(std::make_pair(v->getVarName(), icon));
+            try
+            {
+                this->m_list.emplace(std::make_pair(v->getVarName(), icon));
+            }
+            catch (...) {}
         }
 
         // get icon size
@@ -486,7 +503,7 @@ public:
                     break;
 
                 default:
-                    throw InvalidIconSizeException();
+                    throwException(InvalidIconSizeException);
                 }
             }
             // otherelse default to 24x24

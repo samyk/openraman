@@ -37,7 +37,7 @@ static vector_t linterp(const vector_t& indices, const vector_t& vec)
         double hi = ceil(indices[i]);
 
         if (lo < 0 || hi >= vec.size())
-            throw InvalidInterpolationDataException();
+            throwException(InvalidInterpolationDataException);
 
         double p = indices[i] - lo;
 

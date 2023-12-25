@@ -29,7 +29,7 @@ static unsigned int binomial(unsigned int n, unsigned int k)
 {
 	// check parameters
 	if (k > n)
-		throw InvalidBinomialCoefficients();
+		throwException(InvalidBinomialCoefficients);
 
 	// simple cases
 	if (n == 0 || k == 0)

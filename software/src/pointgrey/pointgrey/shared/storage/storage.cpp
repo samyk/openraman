@@ -39,7 +39,7 @@ void IStoreableObject::restore(const std::string& rFilename)
 
 	// check that container has exactly 1 entry
 	if (list.size() != 1)
-		throw MultipleContainerException();
+		throwException(MultipleContainerException);
 
 	// restore data front content
 	pop(list.front());

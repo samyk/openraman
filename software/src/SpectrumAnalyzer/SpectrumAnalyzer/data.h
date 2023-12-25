@@ -79,7 +79,7 @@ public:
     {
         // skip if plot is null
         if (pPlot == nullptr || pPlot->series.size() < 1)
-            throw NullDataException();
+            throwException(NullDataException);
 
         char szTmp[64];
 

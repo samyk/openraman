@@ -226,7 +226,7 @@ public:
 			return MultiplierType::Hours;
 		}
 
-		throw UnknownMultiplierTypeException();
+		throwException(UnknownMultiplierTypeException);
 	}
 
 	// set multiplier type
@@ -247,7 +247,7 @@ public:
 			break;
 
 		default:
-			throw UnknownMultiplierTypeException();
+			throwException(UnknownMultiplierTypeException);
 		}
 
 		// notify event
@@ -279,7 +279,7 @@ public:
 		if (IsDlgButtonChecked(getWindowHandle(), IDC_FINITE))
 			return LoopMode::NumTriggers;
 
-		throw UnknownLoopModeException();
+		throwException(UnknownLoopModeException);
 	}
 
 	// set loop mode
@@ -296,7 +296,7 @@ public:
 			break;
 
 		default:
-			throw UnknownLoopModeException();
+			throwException(UnknownLoopModeException);
 		}
 
 		// notify event

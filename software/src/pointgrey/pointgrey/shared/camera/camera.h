@@ -20,6 +20,7 @@
 #include <Windows.h>
 
 #include "../utils/singleton.h"
+#include "../utils/evemon.h"
 #include "../math/map.h"
 
 // version should match between exe and dll
@@ -113,7 +114,11 @@ public:
     {
         // throw error message if interfaces have not been freed on app exit
         if (this->m_interfaces.size() > 0)
+        {
+            _error("Application has quit but camera interfaces have not been freed!");
+
             MessageBox(NULL, TEXT("Application has quit but camera interfaces have not been freed!"), TEXT("critical error"), MB_ICONHAND | MB_OK);
+        }
     }
 
     // get current camera
@@ -125,6 +130,8 @@ public:
     // set current camera
     void setCurrentCamera(const std::string& rLabel)
     {
+        _debug("selecting camera %s", rLabel.c_str());
+
         // save state and close current camera
         if (this->m_pCurrentCamera != nullptr)
         {
@@ -173,6 +180,8 @@ public:
     // load all interfaces
     void loadInterfaces(HINSTANCE hInstance)
     {
+        _debug("loading camera interfaces");
+
         // clear previously loaded interfaces
         clearInterfaces();
 
@@ -187,6 +196,8 @@ public:
 
         if (folder != "" && !strEndsWith(fileparts.sDirectory.c_str(), "/") && !strEndsWith(fileparts.sDirectory.c_str(), "\\"))
             folder += "/";
+
+        _debug("loading from %s", folder.c_str());
 
         // build search string
         std::string searchstring = folder + std::string("*.dll");
@@ -222,12 +233,18 @@ public:
 
         // check that some interfaces were created
         if (this->m_interfaces.size() == 0)
+        {
+            _warning("No camera interfaces were found");
+
             MessageBoxA(NULL, "No camera interfaces found!", "error", MB_ICONHAND | MB_OK);
+        }
     }
 
     // free all interfaces
     void clearInterfaces(void)
     {
+        _debug("clearing previous camera interfaces");
+
         // set camera to null
         setCurrentCamera("");
 
@@ -259,12 +276,14 @@ private:
                 return v.pInterface->getCameraByName(rLabel);
 
         // otherelse throw error
-        throw CameraNotFoundException(rLabel);
+        throwException(CameraNotFoundException, rLabel);
     }
 
     // add interface to list
     void addInterface(const std::string& rFilename)
     {
+        _debug("adding interface %s...", rFilename.c_str());
+
         // load library
         HMODULE hLibrary = LoadLibraryA(rFilename.c_str());
 
@@ -279,19 +298,31 @@ private:
             pfnVersion pVersionFunc = (pfnVersion)GetProcAddress(hLibrary, "version");
 
             if (pVersionFunc == nullptr)
+            {
+                _error("Version could not be identified! Aborting");
+
                 break;
+            }
 
             // check that version is compatible
             auto lib_version = (*pVersionFunc)();
 
             if (HIWORD(lib_version) != HIWORD(version()) || LOWORD(lib_version) < HIWORD(version()))
+            {
+                _error("Incompatible version! Aborting");
+
                 break;
+            }
 
             // find pointer to interfaces creator func
             pfnCreateInterface pInterfaceFunc = (pfnCreateInterface)GetProcAddress(hLibrary, "createCameraInterface");
 
             if (pInterfaceFunc == nullptr)
+            {
+                _error("Could not identify abstract factory! Aborting");
+
                 break;
+            }
 
             try
             {
@@ -302,13 +333,21 @@ private:
                 s.pInterface = (*pInterfaceFunc)();
 
                 if (s.pInterface == nullptr)
+                {
+                    _error("Null interface! Aborting");
+
                     break;
+                }
 
                 // add to list
                 this->m_interfaces.emplace_back(std::move(s));
+
+                _debug("interface successfuly added");
             }
             catch (...)
             {
+                _error("Error has occured! Aborting");
+
                 char szTmp[512];
 
                 sprintf_s(szTmp, "Cannot load interface \"%s\"!", rFilename.c_str());

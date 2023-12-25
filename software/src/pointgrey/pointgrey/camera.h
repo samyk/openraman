@@ -22,6 +22,7 @@
 
 #include "shared/utils/utils.h"
 #include "shared/utils/exception.h"
+#include "shared/utils/evemon.h"
 #include "shared/math/map.h"
 
 #include "shared/camera/camera.h"
@@ -146,7 +147,7 @@ public:
 				DeviceInformation.forceip();
 
 				if (DeviceInformation.wrong_subnet)
-					throw WrongSubnetException();
+					throwException(WrongSubnetException);
 			}
 		}
 		catch (...) {}
@@ -201,7 +202,7 @@ public:
 
 		// check pixel format before acquisition
 		if (ImageFormatControl.pixel_format.getString() != "Mono16")
-			throw PixelFormatException(ImageFormatControl.pixel_format.getString(), "Mono16");
+			throwException(PixelFormatException, ImageFormatControl.pixel_format.getString(), "Mono16");
 	}
 
 	// open camera
@@ -211,7 +212,7 @@ public:
 
 		// throw exception if no camera exists, should never happen
 		if (this->m_pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		if (this->m_pCamera.IsValid() && !this->m_pCamera->IsInitialized())
 			this->m_pCamera->Init();
@@ -233,7 +234,7 @@ public:
 
 		// throw exception if no camera exists, should never happen
 		if (this->m_pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		if (this->m_pCamera.IsValid() && this->m_pCamera->IsInitialized())
 			this->m_pCamera->DeInit();
@@ -259,7 +260,7 @@ public:
 
 			// check size
 			if (nSize > sizeof(UserDataType) * nodelist.size())
-				throw NotEnoughMemoryException(nSize, sizeof(UserDataType) * nodelist.size());
+				throwException(NotEnoughMemoryException, nSize, sizeof(UserDataType) * nodelist.size());
 
 			// get data node
 			auto pDataNode = getNode<Spinnaker::GenApi::CIntegerPtr>(RootNodeMap::Camera, { "UserDefinedValues", "UserDefinedValue" }, ACCESS_READ | ACCESS_WRITE);
@@ -269,7 +270,7 @@ public:
 
 			//if (delta < ((int64_t)1 << (sizeof(UserDataType) * 8)))
 			if(delta < (int64_t)4294967295)
-				throw WrongUserDataType();
+				throwException(WrongUserDataType);
 
 			// browse until no bytes remains
 			int iCurrSelector = 0;
@@ -338,7 +339,7 @@ public:
 				if (pCurrEntry != nullptr)
 					pSelectorNode->SetIntValue(pCurrEntry->GetValue());
 
-				throw NotEnoughMemoryException(nSize, sizeof(UserDataType) * nodelist.size());
+				throwException(NotEnoughMemoryException, nSize, sizeof(UserDataType) * nodelist.size());
 			}
 
 			// get data node
@@ -349,7 +350,7 @@ public:
 
 			//if (delta < ((int64_t)1 << (sizeof(UserDataType) * 8)))
 			if (delta < (int64_t)4294967295)
-				throw WrongUserDataType();
+				throwException(WrongUserDataType);
 
 			// browse until no bytes remains
 			int iCurrSelector = 0;
@@ -396,13 +397,13 @@ public:
 	// generic set parameter
 	virtual void setParam(const std::string& rKey, const std::string& rValue) override
 	{
-		throw NotImplementedException();
+		throwException(NotImplementedException);
 	}
 
 	// generic get parameter
 	virtual std::string getParam(const std::string& rKey) const override
 	{
-		throw NotImplementedException();
+		throwException(NotImplementedException);
 	}
 
 	// start acquisition
@@ -413,7 +414,7 @@ public:
 
 		// throw exception if no camera exists, should never happen
 		if (this->m_pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		// start acquisition
 		try
@@ -439,7 +440,7 @@ public:
 
 		// throw exception if no camera exists, should never happen
 		if (this->m_pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		// end acquisition
 		this->m_pCamera->EndAcquisition();
@@ -454,17 +455,17 @@ public:
 
 		// throw exception if no camera exists, should never happen
 		if (this->m_pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		// check trigger state
 		try
 		{
 			if (this->AcquisitionControl.trigger_mode.getString() != "On" || this->AcquisitionControl.trigger_source.getString() != "Software")
-				throw TriggerModeDisabledException();
+				throwException(TriggerModeDisabledException);
 		}
 		catch (...)
 		{
-			throw TriggerModeDisabledException();
+			throwException(TriggerModeDisabledException);
 		}
 
 		// send trigger command
@@ -480,14 +481,14 @@ public:
 
 		// throw exception if no camera exists, should never happen
 		if (this->m_pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		// get next image
 		Spinnaker::ImagePtr pImage = this->m_pCamera->GetNextImage();
 
 		// skip if image is boggous
 		if (pImage->IsIncomplete() || pImage->GetBitsPerPixel() != 16)
-			throw ImageAcquisitionException();
+			throwException(ImageAcquisitionException);
 
 		// acquire image
 		size_t nWidth = pImage->GetWidth();
@@ -557,7 +558,7 @@ public:
 	{
 		// check height
 		if (iHeight > ImageFormatControl.heightmax || iHeight < ImageFormatControl.height.getMin())
-			throw InvalidROIException(iHeight, (int)ImageFormatControl.height.getMin(), (int)ImageFormatControl.heightmax);
+			throwException(InvalidROIException, iHeight, (int)ImageFormatControl.height.getMin(), (int)ImageFormatControl.heightmax);
 
 		// compute new offset
 		int iNewOffset = ((int)this->ImageFormatControl.heightmax - iHeight) / 2;
@@ -677,7 +678,7 @@ public:
 		void assert_ptr(void) const
 		{
 			if (this->m_pParent == nullptr)
-				throw NoCameraException();
+				throwException(NoCameraException);
 		}
 
 		// members
@@ -1150,7 +1151,7 @@ private:
 		AUTOLOCK(this->m_mutex);
 
 		if (this->m_pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		Spinnaker::GenApi::CEnumerationPtr ptrDeviceType = this->m_pCamera->GetTLDeviceNodeMap().GetNode("DeviceType");
 
@@ -1171,7 +1172,7 @@ private:
 	{
 		// throw error if camera is null or invalid
 		if (this->m_pCamera == nullptr || !this->m_pCamera.IsValid())
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		// get root nodemap
 		switch (eRootNodeMap)
@@ -1187,7 +1188,7 @@ private:
 		}
 
 		// throw exception otherwise
-		throw UnknownRootNodeMap(eRootNodeMap);
+		throwException(UnknownRootNodeMap, eRootNodeMap);
 	}
 
 	// assert that node exist
@@ -1222,7 +1223,7 @@ private:
 		}
 
 		// throw exception
-		throw MissingNodeException(name);
+		throwException(MissingNodeException, name);
 	}
 
 	// check that the required access is available
@@ -1230,19 +1231,19 @@ private:
 	{
 		// check that node is valid
 		if (!pNode.IsValid())
-			throw InvalidNodeException();
+			throwException(InvalidNodeException);
 
 		// check that node is available
 		if (!IsAvailable(pNode))
-			throw InvalidAccessException(pNode->GetName().c_str());
+			throwException(InvalidAccessException, pNode->GetName().c_str());
 
 		// check read access
 		if ((ulAccess & ACCESS_READ) != 0 && !IsReadable(pNode))
-			throw InvalidAccessException(pNode->GetName().c_str());
+			throwException(InvalidAccessException, pNode->GetName().c_str());
 
 		// check read access
 		if ((ulAccess & ACCESS_WRITE) != 0 && !IsWritable(pNode))
-			throw InvalidAccessException(pNode->GetName().c_str());
+			throwException(InvalidAccessException, pNode->GetName().c_str());
 	}
 
 	// asser the type of the node
@@ -1250,11 +1251,11 @@ private:
 	{
 		// check that node is valid
 		if (!pNode.IsValid())
-			throw InvalidNodeException();
+			throwException(InvalidNodeException);
 
 		// check type
 		if (pNode->GetPrincipalInterfaceType() != eType)
-			throw InvalidTypeException(pNode->GetName().c_str());
+			throwException(InvalidTypeException, pNode->GetName().c_str());
 	}
 
 	// get node from batch of strings
@@ -1276,7 +1277,7 @@ private:
 				Spinnaker::GenApi::CNodeMapPtr pNodeMapPtr = pCurrNode->GetNodeMap();
 
 				if (!pNodeMapPtr.IsValid())
-					throw InvalidNodeMapException(it->c_str());
+					throwException(InvalidNodeMapException, it->c_str());
 
 				// get node
 				pCurrNode = pNodeMapPtr->GetNode(it->c_str());
@@ -1284,12 +1285,12 @@ private:
 
 			// check that node is valid
 			if (!pCurrNode.IsValid())
-				throw UnknownNodeException(it->c_str());
+				throwException(UnknownNodeException, it->c_str());
 		}
 
 		// check that node is valid
 		if (!pCurrNode.IsValid())
-			throw InvalidNodeException();
+			throwException(InvalidNodeException);
 
 		// check access
 		assert_access(pCurrNode, ulAccess);

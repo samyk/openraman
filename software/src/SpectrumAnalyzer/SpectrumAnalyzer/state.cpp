@@ -20,7 +20,7 @@
 bool SpectrumAnalyzerChild::hasBlank(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->hasBlank();
 }
@@ -28,7 +28,7 @@ bool SpectrumAnalyzerChild::hasBlank(void) const
 vector_t SpectrumAnalyzerChild::getBlank(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getBlank();
 }
@@ -36,7 +36,7 @@ vector_t SpectrumAnalyzerChild::getBlank(void) const
 bool SpectrumAnalyzerChild::hasBlankOpt(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->hasBlankOpt();
 }
@@ -44,7 +44,7 @@ bool SpectrumAnalyzerChild::hasBlankOpt(void) const
 bool SpectrumAnalyzerChild::isParamDialogOpened(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->isParamDialogOpened();
 }
@@ -52,7 +52,7 @@ bool SpectrumAnalyzerChild::isParamDialogOpened(void) const
 bool SpectrumAnalyzerChild::isCalibrationDialogOpened(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->isCalibrationDialogOpened();
 }
@@ -60,7 +60,7 @@ bool SpectrumAnalyzerChild::isCalibrationDialogOpened(void) const
 bool SpectrumAnalyzerChild::hasPlotData(size_t nIndex) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->hasPlotData(nIndex);
 }
@@ -68,7 +68,7 @@ bool SpectrumAnalyzerChild::hasPlotData(size_t nIndex) const
 const guiSignal& SpectrumAnalyzerChild::getPlotData(size_t nIndex) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getPlotData(nIndex);
 }
@@ -76,7 +76,7 @@ const guiSignal& SpectrumAnalyzerChild::getPlotData(size_t nIndex) const
 void SpectrumAnalyzerChild::clearAnnotations(void)
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     this->m_pApp->clearAnnotations();
 }
@@ -84,7 +84,7 @@ void SpectrumAnalyzerChild::clearAnnotations(void)
 size_t SpectrumAnalyzerChild::addAnnotation(const guiSignal& rSignal)
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->addAnnotation(rSignal);
 }
@@ -92,7 +92,7 @@ size_t SpectrumAnalyzerChild::addAnnotation(const guiSignal& rSignal)
 guiSignal& SpectrumAnalyzerChild::getAnnotation(size_t nIndex) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getAnnotation(nIndex);
 }
@@ -100,7 +100,7 @@ guiSignal& SpectrumAnalyzerChild::getAnnotation(size_t nIndex) const
 guiAxis* SpectrumAnalyzerChild::getPrimaryHorizontalAxis(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getPrimaryHorizontalAxis();
 }
@@ -108,7 +108,7 @@ guiAxis* SpectrumAnalyzerChild::getPrimaryHorizontalAxis(void) const
 guiAxis* SpectrumAnalyzerChild::getPrimaryVerticalAxis(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getPrimaryVerticalAxis();
 }
@@ -116,7 +116,7 @@ guiAxis* SpectrumAnalyzerChild::getPrimaryVerticalAxis(void) const
 guiAxis* SpectrumAnalyzerChild::getSecondaryHorizontalAxis(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getSecondaryHorizontalAxis();
 }
@@ -124,7 +124,7 @@ guiAxis* SpectrumAnalyzerChild::getSecondaryHorizontalAxis(void) const
 guiAxis* SpectrumAnalyzerChild::getSecondaryVerticalAxis(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getSecondaryVerticalAxis();
 }
@@ -132,7 +132,7 @@ guiAxis* SpectrumAnalyzerChild::getSecondaryVerticalAxis(void) const
 bool SpectrumAnalyzerChild::isShowSaturationDataEnabled(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->isShowSaturationDataEnabled();
 }
@@ -140,7 +140,7 @@ bool SpectrumAnalyzerChild::isShowSaturationDataEnabled(void) const
 bool SpectrumAnalyzerChild::isInMultipleAcquisition(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->isInMultipleAcquisition();
 }
@@ -148,7 +148,7 @@ bool SpectrumAnalyzerChild::isInMultipleAcquisition(void) const
 AxisType SpectrumAnalyzerChild::getAxisType(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getAxisType();
 }
@@ -156,7 +156,7 @@ AxisType SpectrumAnalyzerChild::getAxisType(void) const
 int SpectrumAnalyzerChild::getSmoothing(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getSmoothing();
 }
@@ -164,7 +164,7 @@ int SpectrumAnalyzerChild::getSmoothing(void) const
 bool SpectrumAnalyzerChild::isMedFiltEnabled(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->isMedFiltEnabled();
 }
@@ -172,7 +172,7 @@ bool SpectrumAnalyzerChild::isMedFiltEnabled(void) const
 bool SpectrumAnalyzerChild::isBaselineRemovalEnabled(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->isBaselineRemovalEnabled();
 }
@@ -180,7 +180,7 @@ bool SpectrumAnalyzerChild::isBaselineRemovalEnabled(void) const
 bool SpectrumAnalyzerChild::isBlankRemovalEnabled(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->isBlankRemovalEnabled();
 }
@@ -188,7 +188,7 @@ bool SpectrumAnalyzerChild::isBlankRemovalEnabled(void) const
 double SpectrumAnalyzerChild::getExposure(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getExposure();
 }
@@ -196,7 +196,7 @@ double SpectrumAnalyzerChild::getExposure(void) const
 double SpectrumAnalyzerChild::getGain(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getGain();
 }
@@ -204,7 +204,7 @@ double SpectrumAnalyzerChild::getGain(void) const
 double SpectrumAnalyzerChild::getGainDB(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getGainDB();
 }
@@ -212,7 +212,7 @@ double SpectrumAnalyzerChild::getGainDB(void) const
 bool SpectrumAnalyzerChild::isSGolayEnable(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->isSGolayEnable();
 }
@@ -220,7 +220,7 @@ bool SpectrumAnalyzerChild::isSGolayEnable(void) const
 int SpectrumAnalyzerChild::getSGolayWindowSize(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getSGolayWindowSize();
 }
@@ -228,7 +228,7 @@ int SpectrumAnalyzerChild::getSGolayWindowSize(void) const
 int SpectrumAnalyzerChild::getSGolayOrder(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getSGolayOrder();
 }
@@ -236,7 +236,7 @@ int SpectrumAnalyzerChild::getSGolayOrder(void) const
 int SpectrumAnalyzerChild::getSGolayDerivative(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getSGolayDerivative();
 }
@@ -244,7 +244,7 @@ int SpectrumAnalyzerChild::getSGolayDerivative(void) const
 LogFormat SpectrumAnalyzerChild::getLogFormat(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getLogFormat();
 }
@@ -252,7 +252,7 @@ LogFormat SpectrumAnalyzerChild::getLogFormat(void) const
 bool SpectrumAnalyzerChild::hasPlot(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->hasPlot();
 }
@@ -260,7 +260,7 @@ bool SpectrumAnalyzerChild::hasPlot(void) const
 bool SpectrumAnalyzerChild::hasAxisChangeOpt(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->hasAxisChangeOpt();
 }
@@ -268,7 +268,7 @@ bool SpectrumAnalyzerChild::hasAxisChangeOpt(void) const
 bool SpectrumAnalyzerChild::hasCamera(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->hasCamera();
 }
@@ -276,7 +276,7 @@ bool SpectrumAnalyzerChild::hasCamera(void) const
 void SpectrumAnalyzerChild::disconnectCamera(void)
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->disconnectCamera();
 }
@@ -284,7 +284,7 @@ void SpectrumAnalyzerChild::disconnectCamera(void)
 void SpectrumAnalyzerChild::setCamera(const std::string& camera)
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     this->m_pApp->setCamera(camera);
 }
@@ -292,7 +292,7 @@ void SpectrumAnalyzerChild::setCamera(const std::string& camera)
 void SpectrumAnalyzerChild::onConfirmImageSave(const std::string& rTitle)
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     this->m_pApp->onConfirmImageSave(rTitle);
 }
@@ -300,7 +300,7 @@ void SpectrumAnalyzerChild::onConfirmImageSave(const std::string& rTitle)
 void SpectrumAnalyzerChild::setPlotBuilder(std::shared_ptr<IPlotBuilder> pDataBuilder)
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     this->m_pApp->setPlotBuilder(pDataBuilder);
 }
@@ -308,7 +308,7 @@ void SpectrumAnalyzerChild::setPlotBuilder(std::shared_ptr<IPlotBuilder> pDataBu
 double SpectrumAnalyzerChild::getRamanWavelength(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getRamanWavelength();
 }
@@ -316,7 +316,7 @@ double SpectrumAnalyzerChild::getRamanWavelength(void) const
 bool SpectrumAnalyzerChild::hasCalibrationData(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->hasCalibrationData();
 }
@@ -324,7 +324,7 @@ bool SpectrumAnalyzerChild::hasCalibrationData(void) const
 std::array<double, 4> SpectrumAnalyzerChild::getSolution(void) const
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     return this->m_pApp->getSolution();
 }
@@ -332,7 +332,7 @@ std::array<double, 4> SpectrumAnalyzerChild::getSolution(void) const
 void SpectrumAnalyzerChild::setSolution(const std::array<double, 4>& rSolution)
 {
     if (this->m_pApp == nullptr)
-        throw InvalidFunctionException();
+        throwException(InvalidFunctionException);
 
     this->m_pApp->setSolution(rSolution);
 }

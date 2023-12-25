@@ -21,5 +21,12 @@
 class IException
 {
 public:
+    IException(void) {}
+
 	virtual std::string toString(void) const = 0;
 };
+
+// send message to event monitor
+void hookException(const IException& rException, const char* pszFilename, unsigned int uiLineNumber);
+
+#define throwException(ExceptionType, ...)       { ExceptionType e{__VA_ARGS__}; hookException(e, __FILE__, __LINE__); throw e; }

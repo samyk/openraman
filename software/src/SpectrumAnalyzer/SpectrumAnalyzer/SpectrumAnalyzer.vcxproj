@@ -92,7 +92,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);__EVENT_MONITORING__</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -101,14 +101,14 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;Comctl32.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(ProjectName).exe" "$(SolutionDir)\..\..\_build\$(ProjectName).exe"</Command>
+      <Command>copy /Y "$(TargetDir)$(ProjectName).exe" "$(SolutionDir)\..\..\bin\$(ProjectName).exe"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions);__EVENT_MONITORING__</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -117,7 +117,7 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;Comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(ProjectName).exe" "$(SolutionDir)\..\..\_build\$(ProjectName).exe"</Command>
+      <Command>copy /Y "$(TargetDir)$(ProjectName).exe" "$(SolutionDir)\..\..\bin64\$(ProjectName).exe"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -126,7 +126,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);__EVENT_MONITORING__</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -147,7 +147,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions);__EVENT_MONITORING__</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -169,6 +169,8 @@
     <ClCompile Include="shared\gui\dialogs.cpp" />
     <ClCompile Include="shared\gui\icons.cpp" />
     <ClCompile Include="shared\storage\storage.cpp" />
+    <ClCompile Include="shared\utils\evemon.cpp" />
+    <ClCompile Include="shared\utils\exception.cpp" />
     <ClCompile Include="shared\utils\thread.cpp" />
     <ClCompile Include="spc.cpp" />
     <ClCompile Include="state.cpp" />
@@ -235,10 +237,13 @@
     <ClInclude Include="shared\storage\storage_file.h" />
     <ClInclude Include="shared\storage\storage_object.h" />
     <ClInclude Include="shared\storage\storeable_object.h" />
+    <ClInclude Include="shared\utils\evemon.h" />
     <ClInclude Include="shared\utils\event.h" />
     <ClInclude Include="shared\utils\exception.h" />
     <ClInclude Include="shared\utils\flags.h" />
+    <ClInclude Include="shared\utils\format.h" />
     <ClInclude Include="shared\utils\notify.h" />
+    <ClInclude Include="shared\utils\rlock.h" />
     <ClInclude Include="shared\utils\safe.h" />
     <ClInclude Include="shared\utils\singleton.h" />
     <ClInclude Include="shared\utils\thread.h" />

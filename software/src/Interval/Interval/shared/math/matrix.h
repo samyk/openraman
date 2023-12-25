@@ -123,6 +123,40 @@ public:
 	}
 };
 
+// NullVectorException exception class
+class NullVectorException : public IException
+{
+public:
+	virtual std::string toString(void) const override
+	{
+		return "Vector is null";
+	}
+};
+
+// WrongDimensionVectorException exception class
+class WrongDimensionVectorException : public IException
+{
+public:
+	WrongDimensionVectorException(size_t nRows, size_t nColumns, size_t nNumElements)
+	{
+		this->m_nRows = nRows;
+		this->m_nColumns = nColumns;
+		this->m_nNumElements = nNumElements;
+	}
+
+	virtual std::string toString(void) const override
+	{
+		char szTmp[512];
+
+		sprintf_s(szTmp, "Cannot map %zu elements as %zux%zu matrix!", this->m_nNumElements, this->m_nRows, this->m_nColumns);
+
+		return std::string(szTmp);
+	}
+
+private:
+	size_t m_nRows, m_nColumns, m_nNumElements;
+};
+
 // Matrix class is built on top of Map2D
 class Matrix : public Map2D<double>
 {
@@ -142,7 +176,7 @@ public:
 	const Matrix& operator+=(const Matrix& rMap)
 	{
 		if (rMap.getWidth() != getWidth() || rMap.getHeight() != getHeight())
-			throw MatrixSizeMismatchException(rMap.getWidth(), rMap.getHeight(), getWidth(), getHeight());
+			throwException(MatrixSizeMismatchException, rMap.getWidth(), rMap.getHeight(), getWidth(), getHeight());
 
 		for (size_t y = 0; y < getHeight(); y++)
 			for (size_t x = 0; x < getWidth(); x++)
@@ -165,7 +199,7 @@ public:
 	const Matrix& operator-=(const Matrix& rMap)
 	{
 		if (rMap.getWidth() != getWidth() || rMap.getHeight() != getHeight())
-			throw MatrixSizeMismatchException(rMap.getWidth(), rMap.getHeight(), getWidth(), getHeight());
+			throwException(MatrixSizeMismatchException, rMap.getWidth(), rMap.getHeight(), getWidth(), getHeight());
 
 		for (size_t y = 0; y < getHeight(); y++)
 			for (size_t x = 0; x < getWidth(); x++)
@@ -231,13 +265,13 @@ public:
 	{
 		// cannot apply on null matrix
 		if (getWidth() == 0 || getHeight() == 0)
-			throw MatrixWrongSizeException(numRows(), numColumns());
+			throwException(MatrixWrongSizeException, numRows(), numColumns());
 
 		if (col >= numColumns())
-			throw InvalidColumnException(col);
+			throwException(InvalidColumnException, col);
 
 		if (row >= numRows())
-			throw InvalidRowException(row);
+			throwException(InvalidRowException, row);
 
 		// prepare output matrix
 		Matrix ret(getWidth() - 1, getHeight() - 1);
@@ -269,7 +303,7 @@ public:
 	{
 		// trigger error if at least one dimension is null
 		if (numRows() == 0 || numColumns() == 0)
-			throw MatrixWrongSizeException(numRows(), numColumns());
+			throwException(MatrixWrongSizeException, numRows(), numColumns());
 
 		// special case for size 1
 		if (numRows() == 1 && numColumns() == 1)
@@ -329,7 +363,7 @@ public:
 	vector_t extractRow(size_t row) const
 	{
 		if (row >= numRows())
-			throw InvalidRowException(row);
+			throwException(InvalidRowException, row);
 
 		vector_t ret(numColumns());
 
@@ -343,7 +377,7 @@ public:
 	vector_t extractColumn(size_t col) const
 	{
 		if (col >= numColumns())
-			throw InvalidColumnException(col);
+			throwException(InvalidColumnException, col);
 
 		vector_t ret(numRows());
 
@@ -370,7 +404,7 @@ public:
 static auto operator+(const Matrix& rA, const Matrix& rB)
 {
 	if (rA.numRows() != rB.numRows() || rA.numColumns() != rB.numColumns())
-		throw MatrixSizeMismatchException(rA.numRows(), rA.numColumns(), rB.numRows(), rB.numColumns());
+		throwException(MatrixSizeMismatchException, rA.numRows(), rA.numColumns(), rB.numRows(), rB.numColumns());
 
 	Matrix ret(rA.numColumns(), rA.numRows());
 
@@ -409,7 +443,7 @@ static auto operator+(const double fValue, const Matrix& rA)
 static auto operator-(const Matrix& rA, const Matrix& rB)
 {
 	if (rA.numRows() != rB.numRows() || rA.numColumns() != rB.numColumns())
-		throw MatrixSizeMismatchException(rA.numRows(), rA.numColumns(), rB.numRows(), rB.numColumns());
+		throwException(MatrixSizeMismatchException, rA.numRows(), rA.numColumns(), rB.numRows(), rB.numColumns());
 
 	Matrix ret(rA.numColumns(), rA.numRows());
 
@@ -448,7 +482,7 @@ static auto operator-(const double fValue, const Matrix& rA)
 static auto operator*(const Matrix& rA, const Matrix& rB)
 {
 	if (rA.numColumns() != rB.numRows())
-		throw MatrixSizeMismatchException(rA.numRows(), rA.numColumns(), rB.numRows(), rB.numColumns());
+		throwException(MatrixSizeMismatchException, rA.numRows(), rA.numColumns(), rB.numRows(), rB.numColumns());
 
 	Matrix ret(rA.numRows(), rB.numColumns());
 
@@ -468,7 +502,7 @@ static auto operator*(const Matrix& rA, const Matrix& rB)
 static auto operator*(const Matrix& rMatrix, const vector_t& rVector)
 {
 	if (rMatrix.numRows() != rVector.size())
-		throw MatrixSizeMismatchException(rMatrix.numRows(), rMatrix.numColumns(), 1, rVector.size());
+		throwException(MatrixSizeMismatchException, rMatrix.numRows(), rMatrix.numColumns(), 1, rVector.size());
 
 	vector_t ret(rMatrix.numColumns());
 
@@ -528,45 +562,11 @@ static auto operator/(const Matrix& rA, const double fValue)
 // convert 1D vector to 2D matrix
 static auto reshape(const vector_t& rVector, size_t nRows, size_t nColumns)
 {
-	// NullVectorException exception class
-	class NullVectorException : public IException
-	{
-	public:
-		virtual std::string toString(void) const override
-		{
-			return "Vector is null";
-		}
-	};
-
-	// WrongDimensionVectorException exception class
-	class WrongDimensionVectorException : public IException
-	{
-	public:
-		WrongDimensionVectorException(size_t nRows, size_t nColumns, size_t nNumElements)
-		{
-			this->m_nRows = nRows;
-			this->m_nColumns = nColumns;
-			this->m_nNumElements = nNumElements;
-		}
-
-		virtual std::string toString(void) const override
-		{
-			char szTmp[512];
-
-			sprintf_s(szTmp, "Cannot map %zu elements as %zux%zu matrix!", this->m_nNumElements, this->m_nRows, this->m_nColumns);
-
-			return std::string(szTmp);
-		}
-
-	private:
-		size_t m_nRows, m_nColumns, m_nNumElements;
-	};
-
 	if (rVector.size() == 0)
-		throw NullVectorException();
+		throwException(NullVectorException);
 
 	if (rVector.size() != __MULT(nRows, nColumns))
-		throw WrongDimensionVectorException(nRows, nColumns, rVector.size());
+		throwException(WrongDimensionVectorException, nRows, nColumns, rVector.size());
 
 	Matrix ret(nRows, nColumns);
 
@@ -600,7 +600,7 @@ static auto inv(const Matrix& rMatrix)
 {
 	// matrix must be square
 	if (rMatrix.numRows() != rMatrix.numColumns())
-		throw MatrixNotInvertibleException();
+		throwException(MatrixNotInvertibleException);
 
 	// simple value case
 	if (rMatrix.numRows() == 1)
@@ -608,7 +608,7 @@ static auto inv(const Matrix& rMatrix)
 		Matrix ret(1, 1);
 
 		if (fabs(rMatrix(0, 0)) < 1e-12)
-			throw MatrixNotInvertibleException();
+			throwException(MatrixNotInvertibleException);
 
 		ret(0, 0) = 1.0 / rMatrix(0, 0);
 
@@ -620,7 +620,7 @@ static auto inv(const Matrix& rMatrix)
 
 	// trigger error if too small
 	if (fabs(fDeterminant) < 1e-12)
-		throw MatrixNotInvertibleException();
+		throwException(MatrixNotInvertibleException);
 
 	// compute inverse
 	return rMatrix.cofactor().transpose() / fDeterminant;

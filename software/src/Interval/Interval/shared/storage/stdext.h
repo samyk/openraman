@@ -47,7 +47,7 @@ public:
 	{
 		// check typename
 		if (rContainer.getTypeName() != getClassName())
-			throw WrongTypeException();
+			throwException(WrongTypeException);
 
 		size_t nSize = 0;
 
@@ -58,7 +58,7 @@ public:
 		char *string = (char*)malloc(nSize);
 
 		if(string == nullptr)
-			throw MemoryAllocationException(nSize);
+			throwException(MemoryAllocationException, nSize);
 
 		try
 		{
@@ -74,7 +74,7 @@ public:
 
 			string = nullptr;
 
-			throw UnknownVarException();
+			throwException(UnknownVarException);
 		}
 
 		// free temporary string
@@ -129,7 +129,7 @@ public:
 
 		// check typename
 		if (rContainer.getTypeName() != getClassName())
-			throw WrongTypeException();
+			throwException(WrongTypeException);
 
 		// get all variable/children
 		if (is_storeable_object_t<Type>::test())
@@ -156,7 +156,7 @@ public:
 			for (auto& v : vars)
 			{
 				if (v.owner != getClassName() || v.type != sVarType || v.nBytesSize != sizeof(Type))
-					throw WrongTypeException();
+					throwException(WrongTypeException);
 
 				this->emplace_back(*(Type*)v.pData);
 			}

@@ -33,6 +33,12 @@
     <ClCompile Include="shared\gui\icons.cpp">
       <Filter>Shared Folder\gui</Filter>
     </ClCompile>
+    <ClCompile Include="shared\utils\evemon.cpp">
+      <Filter>Shared Folder\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\utils\exception.cpp">
+      <Filter>Shared Folder\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shared\utils\exception.h">
@@ -55,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="shared\gui\icons.h">
       <Filter>Shared Folder\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\evemon.h">
+      <Filter>Shared Folder\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

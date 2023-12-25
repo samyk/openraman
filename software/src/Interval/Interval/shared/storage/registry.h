@@ -53,7 +53,7 @@ static HKEY getRootKey(RegistryRootKey eRootKey)
 		return HKEY_CURRENT_CONFIG;
 	}
 
-	throw UnknownRootKeyException();
+	throwException(UnknownRootKeyException);
 }
 
  // save binary data to registry

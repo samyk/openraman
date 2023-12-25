@@ -64,7 +64,7 @@ public:
 
         // check if function exist
         if (!this->m_get)
-            throw NoFunctionException();
+            throwException(NoFunctionException);
 
         // get content
         return this->m_get();
@@ -91,7 +91,7 @@ public:
 
         // check if function exist
         if (!this->m_set)
-            throw NoFunctionException();
+            throwException(NoFunctionException);
 
         // set content
         this->m_set(value);
@@ -150,7 +150,7 @@ public:
     {
         // check typename
         if (rContainer.getTypeName() != getClassName())
-            throw WrongTypeException();
+            throwException(WrongTypeException);
 
         // pop var
         Type temp;
@@ -161,7 +161,7 @@ public:
             auto pSubContainer = rContainer.getSubObject("", "object");
 
             if (pSubContainer == nullptr)
-                throw UnknownVarException();
+                throwException(UnknownVarException);
 
             // get storeable object base
             IStoreableObject* pObject = (IStoreableObject*)(__ADDRESS((unsigned char*)&temp, storeable_object_ofs(temp)));
@@ -174,7 +174,7 @@ public:
         {
             // throw exception if cannot read variable
             if (!rContainer.readVariable("", "data", typeid(temp).name(), sizeof(temp), &temp))
-                throw UnknownVarException();
+                throwException(UnknownVarException);
         }
 
         // set content

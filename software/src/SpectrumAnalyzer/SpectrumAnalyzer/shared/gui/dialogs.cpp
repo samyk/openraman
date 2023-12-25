@@ -15,6 +15,7 @@
 #include <Windows.h>
 
 #include "../utils/singleton.h"
+#include "../utils/evemon.h"
 
 #include "dialogs.h"
 
@@ -32,10 +33,14 @@ INT_PTR CALLBACK genericDialogProc(HWND hWnd, UINT uiMessage, WPARAM wParam, LPA
 	}
 	catch (IException& rException)
 	{
+		_error("%s", rException.toString().c_str());
+
 		MessageBoxA(hWnd, rException.toString().c_str(), "error", MB_ICONHAND | MB_OK);
 	}
 	catch (...)
 	{
+		_error("Unknown exception!");
+
 		MessageBoxA(hWnd, "Unknown exception!", "error", MB_ICONHAND | MB_OK);
 	}
 

@@ -45,6 +45,12 @@
     <ClCompile Include="depwalker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="shared\utils\evemon.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\utils\exception.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shared\storage\dynamic_var.h">
@@ -151,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="depwalker.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\evemon.h">
+      <Filter>Shared Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

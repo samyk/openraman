@@ -18,6 +18,8 @@
 #include <Spinnaker.h>
 #include <SpinGenApi/SpinnakerGenApi.h>
 
+#include "shared/utils/exception.h"
+#include "shared/utils/evemon.h"
 #include "shared/camera/camera.h"
 
 #include "exception.h"
@@ -63,7 +65,7 @@ public:
 
 		// throw error if not found
 		if (it == this->m_pCamerasHandles.end())
-			throw CameraNotFoundException(rLabel);
+			throwException(CameraNotFoundException, rLabel);
 
 		// otherelse return pointer
 		return it->second;
@@ -146,7 +148,7 @@ public:
 		} while (false);
 
 		// throw exception
-		throw InitException();
+		throwException(InitException);
 	}
 
 private:

@@ -176,7 +176,7 @@ public:
 	{
 		// throw error if beyond dimensions
 		if (x >= this->m_nWidth || y >= this->m_nHeight)
-			throw ArrayOutOfBoundException();
+			throwException(ArrayOutOfBoundException);
 
 		// return pixel reference
 		return this->m_pData[__ADD(x, __MULT(y, this->m_nWidth))];
@@ -187,7 +187,7 @@ public:
 	{
 		// throw error if beyond dimensions
 		if (x >= this->m_nWidth || y >= this->m_nHeight)
-			throw ArrayOutOfBoundException();
+			throwException(ArrayOutOfBoundException);
 
 		// return pixel data
 		return this->m_pData[__ADD(x, __MULT(y, this->m_nWidth))];

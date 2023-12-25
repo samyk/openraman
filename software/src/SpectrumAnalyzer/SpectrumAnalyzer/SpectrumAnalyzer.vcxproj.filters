@@ -63,6 +63,12 @@
     <ClCompile Include="shared\gui\icons.cpp">
       <Filter>Shared Files\gui</Filter>
     </ClCompile>
+    <ClCompile Include="shared\utils\evemon.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="shared\utils\exception.cpp">
+      <Filter>Shared Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -271,6 +277,15 @@
       <Filter>Shared Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="shared\utils\safe.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\evemon.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\format.h">
+      <Filter>Shared Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="shared\utils\rlock.h">
       <Filter>Shared Files\utils</Filter>
     </ClInclude>
   </ItemGroup>

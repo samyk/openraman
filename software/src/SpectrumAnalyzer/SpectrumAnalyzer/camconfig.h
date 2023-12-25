@@ -107,7 +107,7 @@ public:
 			return LogFormat::SPC;
 		}
 
-		throw UnknownLogFormatException();
+		throwException(UnknownLogFormatException);
 	}
 
 	// set log format
@@ -124,7 +124,7 @@ public:
 			break;
 
 		default:
-			throw UnknownLogFormatException();
+			throwException(UnknownLogFormatException);
 		}
 
 		// notify event
@@ -148,7 +148,7 @@ public:
 			return AxisType::RamanShifts;
 		}
 		
-		throw UnknownAxisTypeException();
+		throwException(UnknownAxisTypeException);
 	}
 
 	// set axis type
@@ -169,7 +169,7 @@ public:
 			break;
 
 		default:
-			throw UnknownAxisTypeException();
+			throwException(UnknownAxisTypeException);
 		}
 
 		// notify event
@@ -181,7 +181,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return IsDlgButtonChecked(getWindowHandle(), IDC_MEDFILT) == TRUE;
@@ -202,7 +202,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return IsDlgButtonChecked(getWindowHandle(), IDC_BASELINE) == TRUE;
@@ -223,7 +223,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return IsDlgButtonChecked(getWindowHandle(), IDC_BLANK) == TRUE;
@@ -250,7 +250,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return IsDlgButtonChecked(getWindowHandle(), IDC_LOG) == TRUE;
@@ -271,7 +271,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return 1 + 2 * (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_SMOOTHING_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -302,7 +302,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_AVERAGE_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -330,7 +330,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		int iExposureTicks = (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_EXPOSURE_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -385,7 +385,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		int iGainTicks = (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_GAIN_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -438,7 +438,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_ROI_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -521,7 +521,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		int iTicks = (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_RAMAN_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -534,7 +534,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return IsDlgButtonChecked(getWindowHandle(), IDC_SGOLAY) == TRUE;
@@ -555,7 +555,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return 1 + 2 * (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_SGOLAY_WINDOW_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -586,7 +586,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_SGOLAY_ORDER_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -614,7 +614,7 @@ public:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return data
 		return (int)SendMessage(GetDlgItem(getWindowHandle(), IDC_SGOLAY_DERIV_SLIDER), TBM_GETPOS, (WPARAM)0, (LPARAM)0);
@@ -995,7 +995,7 @@ private:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// disable all if no camera is connected
 		bEnable &= hasCamera();
@@ -1095,7 +1095,7 @@ private:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		bEnable &= hasPlot();
 
@@ -1115,7 +1115,7 @@ private:
 	{
 		// throw exception if no window (should never happen)
 		if (getWindowHandle() == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// disable all if no camera is connected
 		bEnable &= !isInMultipleAcquisition();

@@ -34,7 +34,7 @@ public:
 	// set text on initialization
 	virtual void init(void) override
 	{
-		SetDlgItemText(getWindowHandle(), IDC_SZ_STRING, TEXT("SpectrumAnalyzer V1.0.0\r\n\r\n2020 (C) OpenRAMAN\r\n\r\nLicensed under CERN-OHL-W v2\r\nVisit http://www.open-raman.org/"));
+		SetDlgItemText(getWindowHandle(), IDC_SZ_STRING, TEXT("SpectrumAnalyzer V1.0.1\r\n\r\n2020 (C) OpenRAMAN\r\n\r\nLicensed under CERN-OHL-W v2\r\nVisit http://www.open-raman.org/"));
 
 		show(true);
 	}

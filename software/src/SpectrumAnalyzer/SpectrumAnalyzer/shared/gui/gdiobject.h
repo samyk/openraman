@@ -72,7 +72,7 @@ public:
 	{
 		// TODO: trigger error if this->m_iResourceCounter == 0
 		if (this->m_iResourceCounter == 0)
-			throw GDIObjectNotAcquiredException();
+			throwException(GDIObjectNotAcquiredException);
 
 		// decrement resource counter
 		this->m_iResourceCounter--;

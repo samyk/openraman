@@ -108,7 +108,7 @@ public:
 	{
 		// throw error if no solution found
 		if (this->m_pOptimizationThread == nullptr || !this->m_pOptimizationThread->hasSolution())
-			throw NoSolutionException();
+			throwException(NoSolutionException);
 
 		return vector2array<double, 4>(this->m_pOptimizationThread->getSolution(4));
 	}
@@ -257,7 +257,7 @@ public:
 			break;
 
 		default:
-			throw UnknownModelException();
+			throwException(UnknownModelException);
 		}
 
 		// notify event
@@ -272,7 +272,7 @@ public:
 		else if (rModel == "Cubic")
 			setModelType(Model::Cubic);
 		else
-			throw UnknownModelException();
+			throwException(UnknownModelException);
 	}
 
 	// get model type
@@ -289,7 +289,7 @@ public:
 			return Model::Cubic;
 
 		default:
-			throw UnknownModelException();
+			throwException(UnknownModelException);
 		}
 	}
 
@@ -307,7 +307,7 @@ public:
 			break;
 
 		default:
-			throw UnknownSourceException();
+			throwException(UnknownSourceException);
 		}
 
 		// notify event
@@ -328,7 +328,7 @@ public:
 			return Source::MercuryArgon;
 
 		default:
-			throw UnknownSourceException();
+			throwException(UnknownSourceException);
 		}
 	}
 
@@ -346,7 +346,7 @@ public:
 
 			// throw error for unknown cases
 		default:
-			throw UnknownSourceException();
+			throwException(UnknownSourceException);
 		}
 	}
 
@@ -685,7 +685,7 @@ private:
 
 		// throw exception for unknown model
 		default:
-			throw UnknownModelException();
+			throwException(UnknownModelException);
 		}
 
 		// get maximum number of peaks
@@ -922,7 +922,7 @@ private:
 
 			// throw exception for unknown model
 		default:
-			throw UnknownModelException();
+			throwException(UnknownModelException);
 		}
 
 		// skip if no thread created

@@ -52,7 +52,7 @@ static vector_t sgolay(const vector_t& rInput, size_t nWindowSize, size_t nOrder
 
     // check inputs
     if (nWindowSize < nOrder || nDerivative >= nOrder)
-        throw InvalidSGolayParameterException(nWindowSize, nOrder, nDerivative);
+        throwException(InvalidSGolayParameterException, nWindowSize, nOrder, nDerivative);
 
     // special case for boxcar
     if (nOrder == 1)

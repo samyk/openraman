@@ -16,6 +16,7 @@
 #include <commctrl.h>
 
 #include "shared/utils/exception.h"
+#include "shared/utils/evemon.h"
 
 #include "app.h"
 
@@ -87,11 +88,15 @@ WNDCLASS makeWndClass(HINSTANCE hInstance)
 
 BOOL WINAPI WinMain(HINSTANCE hInstance, HINSTANCE HprevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+	_debug("Starting SpectrumAnalyzer");
+
 	// check if program is already opened
 	HWND hPrevWnd = FindWindow(CLASS_NAME, NULL);
 
 	if (hPrevWnd != NULL)
 	{
+		_debug("A previous instance of the program was found");
+
 		// send program the file to open if any
 		if (*lpCmdLine != '\0')
 		{
@@ -145,10 +150,14 @@ BOOL WINAPI WinMain(HINSTANCE hInstance, HINSTANCE HprevInstance, LPSTR lpCmdLin
 	}
 	catch (IException& rException)
 	{
+		_critical("%s", rException.toString());
+
 		MessageBoxA(NULL, rException.toString().c_str(), "critical error", MB_ICONHAND | MB_OK);
 	}
 	catch (...)
 	{
+		_critical("Unknown critical error!");
+
 		MessageBox(NULL, TEXT("Cannot start application!"), TEXT("critical error"), MB_ICONHAND | MB_OK);
 	}
 
@@ -164,10 +173,14 @@ BOOL WINAPI WinMain(HINSTANCE hInstance, HINSTANCE HprevInstance, LPSTR lpCmdLin
 	}
 	catch (IException& rException)
 	{
+		_critical("%s", rException.toString());
+
 		MessageBoxA(NULL, rException.toString().c_str(), "critical error", MB_ICONHAND | MB_OK);
 	}
 	catch (...)
 	{
+		_critical("Unknown critical error!");
+
 		MessageBox(NULL, TEXT("Cannot start application!"), TEXT("critical error"), MB_ICONHAND | MB_OK);
 	}
 

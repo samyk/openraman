@@ -23,6 +23,7 @@
 #include "shared/utils/thread.h"
 #include "shared/utils/event.h"
 #include "shared/utils/safe.h"
+#include "shared/utils/evemon.h"
 #include "shared/math/map.h"
 #include "shared/camera/camera.h"
 #include "shared/gui/dialogs.h"
@@ -185,6 +186,8 @@ public:
 	// hide on initialization
 	virtual void init(void) override
 	{
+		_debug("wndIAcquisitionDialog::init");
+
 		// listen to actions
 		listen(EVENT_CLOSE, SELF(wndIAcquisitionDialog::onClose));
 		listen(EVENT_ABORT, SELF(wndIAcquisitionDialog::onAbort));
@@ -198,6 +201,8 @@ public:
 	// start acquisition
 	void acquire(std::shared_ptr<ICamera> pCamera, int iNumData)
 	{
+		_debug("starting acquisition of %d images", iNumData);
+
 		// set camera
 		this->m_pCamera = pCamera;
 
@@ -219,6 +224,8 @@ public:
 		}
 		catch (IException& rException)
 		{
+			_error("%s", rException.toString().c_str());
+
 			MessageBoxA(getWindowHandle(), rException.toString().c_str(), "error", MB_ICONHAND | MB_OK);
 
 			SendMessage(getWindowHandle(), WM_CLOSE, (WPARAM)0, (LPARAM)0);
@@ -227,6 +234,8 @@ public:
 		}
 		catch (...)
 		{
+			_error("Failed to start acquisition!");
+
 			MessageBoxA(getWindowHandle(), "Failed to start acquisition!", "error", MB_ICONHAND | MB_OK);
 
 			SendMessage(getWindowHandle(), WM_CLOSE, (WPARAM)0, (LPARAM)0);
@@ -282,11 +291,15 @@ protected:
 private:
 	void onAbort(void)
 	{
+		_debug("aborting acquisition");
+
 		close();
 	}
 
 	void onClose(void)
 	{
+		_debug("closing acquisition");
+
 		// remove timer
 		KillTimer(getWindowHandle(), 1);
 
@@ -312,6 +325,8 @@ private:
 
 			if (img.isValid())
 			{
+				_debug("acquired new image!");
+
 				// increment number of acquired image
 				this->m_iImagesAcquired++;
 
@@ -320,6 +335,8 @@ private:
 				// process image
 				process(img);
 			}
+			else
+				_warning("image is invalid");
 		}
 
 		// update position

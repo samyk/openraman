@@ -64,17 +64,17 @@ public:
 	}
 
 	// save to file
-	void saveToFile(const std::string& rFilename)
+	void saveToFile(const std::string& rFilename, unsigned long ulEncodingFlags = DEFAULT_ENCODING_FLAGS)
 	{
 		// open file stream
 		std::ofstream file(rFilename, std::ios::out | std::ios::binary | std::ios::trunc);
 
 		// exit if cannot open file
 		if (!file.is_open())
-			throw FileOpenException(rFilename);
+			throwException(FileOpenException, rFilename);
 
 		// pack everything
-		auto buffer = pack();
+		auto buffer = pack(ulEncodingFlags);
 
 		// write
 		file.write((const char*)buffer.data(), buffer.size());
@@ -173,7 +173,7 @@ public:
 
 		// check ident
 		if (pHeader->ulIdent != this->m_ulFileType)
-			throw WrongFileTypeException();
+			throwException(WrongFileTypeException);
 
 		// restore original header
 		auto ulOldChecksum = pHeader->ulChecksum;
@@ -186,7 +186,7 @@ public:
 		auto ulChecksum = checksum(buffer.data(), buffer.size());
 
 		if (ulChecksum != ulOldChecksum)
-			throw WrongChecksumException();
+			throwException(WrongChecksumException);
 
 		// get data
 		auto pOffsetsTable = buffer.ptr<struct buffer_s>(__SIZE_T(pHeader->nBuffersTableOfs), __MULT(sizeof(struct buffer_s), __SIZE_T(pHeader->nNumBuffers)));
@@ -195,7 +195,7 @@ public:
 		for (size_t i = 0; i < __SIZE_T(pHeader->nNumBuffers); i++)
 		{
 			if (__SIZE_T(__ADD(pOffsetsTable[i].nOffset, pOffsetsTable[i].nSize)) > buffer.size())
-				throw InvalidBufferException();
+				throwException(InvalidBufferException);
 
 			StorageBuffer temp_buffer(__ADDRESS(pData, __SIZE_T(pOffsetsTable[i].nOffset)), __SIZE_T(pOffsetsTable[i].nSize));
 

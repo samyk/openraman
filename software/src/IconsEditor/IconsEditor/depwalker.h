@@ -95,7 +95,7 @@ public:
             this->m_hModule = LoadLibraryA(rLibrary.c_str());
 
             if (this->m_hModule == NULL)
-                throw InvalidModuleException(rLibrary);
+                throwException(InvalidModuleException, rLibrary);
 
             this->m_library = rLibrary;
         }
@@ -186,7 +186,7 @@ public:
             string_list list;
 
             if (EnumResourceNamesA(this->m_hModule, MAKEINTRESOURCEA(3), &EnumResourceCallback, (LONG_PTR)&list) != TRUE)
-                throw EnumResourcesException();
+                throwException(EnumResourcesException);
 
             // convert to HICON list
             for (auto& v : list)
@@ -254,7 +254,7 @@ public:
     Library& getLibrary(const std::string& rLibrary)
     {
         if (!hasLibrary(rLibrary))
-            throw LibraryNotFoundException(rLibrary);
+            throwException(LibraryNotFoundException, rLibrary);
 
         return this->m_list[rLibrary];
     }

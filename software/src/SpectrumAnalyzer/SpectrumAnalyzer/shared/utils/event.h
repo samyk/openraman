@@ -53,7 +53,7 @@ public:
 	{
 		// throw exception for bad events, should never happen
 		if (this->m_hEvent == NULL)
-			throw InvalidEventException();
+			throwException(InvalidEventException);
 
 		// get timeout
 		DWORD dwTimeout = INFINITE;
@@ -70,7 +70,7 @@ public:
 	{
 		// throw exception for bad events, should never happen
 		if (this->m_hEvent == NULL)
-			throw InvalidEventException();
+			throwException(InvalidEventException);
 
 		// set status
 		SetEvent(this->m_hEvent);
@@ -81,7 +81,7 @@ public:
 	{
 		// throw exception for bad events, should never happen
 		if (this->m_hEvent == NULL)
-			throw InvalidEventException();
+			throwException(InvalidEventException);
 
 		// reset status
 		ResetEvent(this->m_hEvent);
@@ -92,7 +92,7 @@ public:
 	{
 		// throw exception for bad events, should never happen
 		if (this->m_hEvent == NULL)
-			throw InvalidEventException();
+			throwException(InvalidEventException);
 
 		// check status
 		return WaitForSingleObject(this->m_hEvent, 0) != WAIT_OBJECT_0;

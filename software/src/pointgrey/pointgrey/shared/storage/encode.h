@@ -163,6 +163,6 @@ static StorageBuffer decode(const StorageBuffer& rBuffer, int encoding)
 		return rle0_decode(rBuffer);
 
 	default:
-		throw UnknownEncodingException();
+		throwException(UnknownEncodingException);
 	}
 }

@@ -75,6 +75,8 @@ public:
 	// constructor
     SpectrumAnalyzerApp(HINSTANCE hInstance)
     {
+		_debug("initializing SpectrumAnalyzerApp");
+
 		// copy instance
 		this->m_hInstance = hInstance;
 
@@ -111,16 +113,20 @@ public:
 		listen(EVENT_DISABLE_ALL, SELF(SpectrumAnalyzerApp::onDisableAll));
 
 		// load splash screen
+		_debug("loading splash screen");
+
 		this->m_hSplashScreen = (HBITMAP)LoadBitmap(hInstance, MAKEINTRESOURCE(IDB_SPLASH));
 
 		if (this->m_hSplashScreen == NULL)
-			throw InitException();
+			throwException(InitException);
 
 		// create window
+		_debug("creating windows");
+
 		this->m_hWnd = CreateWindow(CLASS_NAME, APP_NAME, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX, CW_USEDEFAULT, CW_USEDEFAULT, SCREENWIDTH, SCREENHEIGHT, NULL, NULL, hInstance, NULL);
 
 		if (this->m_hWnd == NULL)
-			throw InitException();
+			throwException(InitException);
 
 		// center window
 		SetWindowPos(this->m_hWnd, HWND_TOP, GetSystemMetrics(SM_CXSCREEN) / 2 - SCREENWIDTH / 2, GetSystemMetrics(SM_CYSCREEN) / 2 - SCREENHEIGHT / 2, 0, 0, SWP_NOSIZE);
@@ -170,58 +176,61 @@ public:
 		SendMessage(hToolbar, TB_SETEXTENDEDSTYLE, 0, (LPARAM)TBSTYLE_EX_MIXEDBUTTONS);
 
 		// import icon if existing
-		try
-		{
-			ImportedIconSet icons;
+		ImportedIconSet icons;
 
 #if 0
-			icons.addIcon("OPEN", "%SystemRoot%\\System32\\SHELL32.dll", 16772);
-			icons.addIcon("SAVE", "%SystemRoot%\\System32\\SHELL32.dll", 16761);
-			icons.addIcon("CLIPBOARD", "%SystemRoot%\\System32\\SHELL32.dll", 148);
-			icons.addIcon("IMSAVE", "%SystemRoot%\\System32\\SHELL32.dll", 63001);
-			icons.addIcon("CONNECT", "%SystemRoot%\\System32\\SHELL32.dll", 244);
-			icons.addIcon("SINGLE ACQ", "%SystemRoot%\\System32\\SHELL32.dll", 246);
-			icons.addIcon("MULTIPLE ACQ", "%SystemRoot%\\System32\\SHELL32.dll", 224);
-			icons.addIcon("CONFIG", "%SystemRoot%\\System32\\SHELL32.dll", 16775);
-			icons.addIcon("SET BLANK", "%SystemRoot%\\System32\\SHELL32.dll", 322);
-			icons.addIcon("CLEAR BLANK", "%SystemRoot%\\System32\\SHELL32.dll", 16777);
-			icons.addIcon("SHOW SATURATION", "%SystemRoot%\\System32\\SHELL32.dll", 167);
-			icons.addIcon("HELP", "%SystemRoot%\\System32\\SHELL32.dll", 1001);
-			icons.addIcon("CALIBRATE", "%SystemRoot%\\System32\\SHELL32.dll", 321);
+		icons.addIcon("OPEN", "%SystemRoot%\\System32\\SHELL32.dll", 16772);
+		icons.addIcon("SAVE", "%SystemRoot%\\System32\\SHELL32.dll", 16761);
+		icons.addIcon("CLIPBOARD", "%SystemRoot%\\System32\\SHELL32.dll", 148);
+		icons.addIcon("IMSAVE", "%SystemRoot%\\System32\\SHELL32.dll", 63001);
+		icons.addIcon("CONNECT", "%SystemRoot%\\System32\\SHELL32.dll", 244);
+		icons.addIcon("SINGLE ACQ", "%SystemRoot%\\System32\\SHELL32.dll", 246);
+		icons.addIcon("MULTIPLE ACQ", "%SystemRoot%\\System32\\SHELL32.dll", 224);
+		icons.addIcon("CONFIG", "%SystemRoot%\\System32\\SHELL32.dll", 16775);
+		icons.addIcon("SET BLANK", "%SystemRoot%\\System32\\SHELL32.dll", 322);
+		icons.addIcon("CLEAR BLANK", "%SystemRoot%\\System32\\SHELL32.dll", 16777);
+		icons.addIcon("SHOW SATURATION", "%SystemRoot%\\System32\\SHELL32.dll", 167);
+		icons.addIcon("HELP", "%SystemRoot%\\System32\\SHELL32.dll", 1001);
+		icons.addIcon("CALIBRATE", "%SystemRoot%\\System32\\SHELL32.dll", 321);
 
-			icons.saveToFile("icons.bin");
+		icons.saveToFile("icons.bin");
 #else
 
+		try
+		{
+			_debug("importing icons");
+
 			icons.loadFromResource(IDR_ICONS);
+		}
+		catch (...) {}
 
 #endif
 
-			// load image list
-			const size_t nToolbarSize = icons.getIconSize();
+		// load image list
+		const size_t nToolbarSize = icons.getIconSize();
 
-			this->m_hImageList = ImageList_Create((int)nToolbarSize, (int)nToolbarSize, ILC_COLOR32, 14, 0);
+		this->m_hImageList = ImageList_Create((int)nToolbarSize, (int)nToolbarSize, ILC_COLOR32, 14, 0);
 
-			if (this->m_hImageList == NULL)
-				throw InitException();
+		if (this->m_hImageList == NULL)
+			throwException(InitException);
 
-			// set image list to toolbar
-			ImageList_Add(this->m_hImageList, (HBITMAP)LoadImage(hInstance, MAKEINTRESOURCE(IDB_BITMAP1), IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION), NULL);
+		// set image list to toolbar
+		ImageList_Add(this->m_hImageList, (HBITMAP)LoadImage(hInstance, MAKEINTRESOURCE(IDB_BITMAP1), IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION), NULL);
 
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_OPEN, icons.getIcon("OPEN")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_SAVE, icons.getIcon("SAVE")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CLIPBOARD, icons.getIcon("CLIPBOARD")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_IMSAVE, icons.getIcon("IMSAVE")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CONNECT, icons.getIcon("CONNECT")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_SINGLE_ACQ, icons.getIcon("SINGLE ACQ")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_MULT_ACQ, icons.getIcon("MULTIPLE ACQ")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CONFIG, icons.getIcon("CONFIG")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_SHOWSAT, icons.getIcon("SHOW SATURATION")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_SETBLANK, icons.getIcon("SET BLANK")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CLEARBLANK, icons.getIcon("CLEAR BLANK")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_HELP, icons.getIcon("HELP")));
-			NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CALIBRATE, icons.getIcon("CALIBRATE")));
-		}
-		catch (...) {}
+		// replace icons
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_OPEN, icons.getIcon("OPEN")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_SAVE, icons.getIcon("SAVE")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CLIPBOARD, icons.getIcon("CLIPBOARD")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_IMSAVE, icons.getIcon("IMSAVE")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CONNECT, icons.getIcon("CONNECT")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_SINGLE_ACQ, icons.getIcon("SINGLE ACQ")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_MULT_ACQ, icons.getIcon("MULTIPLE ACQ")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CONFIG, icons.getIcon("CONFIG")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_SHOWSAT, icons.getIcon("SHOW SATURATION")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_SETBLANK, icons.getIcon("SET BLANK")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CLEARBLANK, icons.getIcon("CLEAR BLANK")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_HELP, icons.getIcon("HELP")));
+		NOTHROW(ImageList_ReplaceIcon(this->m_hImageList, ICONID_CALIBRATE, icons.getIcon("CALIBRATE")));
 
 		// set toolbar data
 		SendMessage(hToolbar, TB_SETIMAGELIST, (WPARAM)wImageList, (LPARAM)this->m_hImageList);
@@ -231,7 +240,7 @@ public:
 		this->m_hFont = CreateFont(12, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, VARIABLE_PITCH | FF_SWISS, TEXT("Calibri"));
 
 		if (this->m_hFont == NULL)
-			throw InitException();
+			throwException(InitException);
 
 		SendMessage(hToolbar, WM_SETFONT, (WPARAM)this->m_hFont, (LPARAM)TRUE);
 
@@ -252,16 +261,20 @@ public:
 		auto hRenderZone = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("Static"), TEXT(""), WS_CHILD | WS_VISIBLE, render_rect.left, render_rect.top, render_rect.right - render_rect.left, render_rect.bottom - render_rect.top, this->m_hWnd, (HMENU)IDC_PLOT, hInstance, NULL);
 
 		// create standard plot
+		_debug("creating plot");
+
 		this->m_pPlot = createSpectrumPlot();
 
 		if (this->m_pPlot == nullptr)
-			throw InitException();
+			throwException(InitException);
 
 		// create parameter dialog
+		_debug("creating parameters dialog");
+
 		this->m_pParamsDialog = createDialog<wndParametersDialog>(this->m_hWnd, hInstance);
 
 		if (this->m_pParamsDialog == nullptr)
-			throw InitException();
+			throwException(InitException);
 
 		this->m_pParamsDialog->setApp(this);
 
@@ -281,10 +294,12 @@ public:
 		this->m_pParamsDialog->init();
 
 		// create calibration dialog
+		_debug("creating calibration dialog");
+
 		this->m_pCalibrationDialog = createDialog<wndCalibrationDialog>(this->m_hWnd, hInstance);
 
 		if (this->m_pCalibrationDialog == nullptr)
-			throw InitException();
+			throwException(InitException);
 
 		this->m_pCalibrationDialog->setApp(this);
 
@@ -310,6 +325,8 @@ public:
 	// destructor
 	~SpectrumAnalyzerApp(void)
 	{
+		_debug("clearing SpectrumAnalyzerApp");
+
 		// delete image list
 		if (this->m_hImageList != NULL)
 			ImageList_Destroy(this->m_hImageList);
@@ -337,6 +354,8 @@ public:
 	// initialize window by issueing redraw operation
 	void init(void)
 	{
+		_debug("finishing initialization");
+
 		// redraw window
 		notify(EVENT_REDRAW);
 		notify(EVENT_RENDER);
@@ -371,6 +390,8 @@ public:
 		// create data builder object
 		try
 		{
+			_debug("loading file %s", pszFilename);
+
 			// .csv case
 			if (strEndsWith(pszFilename, ".csv"))
 			{
@@ -389,7 +410,7 @@ public:
 				StorageObject* pObject = container.get("", "data");
 
 				if (pObject == nullptr)
-					throw EmptyFileException(pszFilename);
+					throwException(EmptyFileException, pszFilename);
 
 				SpectreFile spc;
 				spc.pop(*pObject);
@@ -415,23 +436,31 @@ public:
 					// set
 					setSolution(vector2array<double, 4>(calibration));
 				}
+				else
+					_warning("no calibration found in file!");
 
 				// load configuration if existing
 				auto pConfiguration = container.get("", "config");
 
 				if (pConfiguration != nullptr && this->m_pParamsDialog != nullptr)
 					this->m_pParamsDialog->pop(*pConfiguration);
+				else
+					_warning("no configuration found in file!");
 			}
 			// throw exception for unknown extensions
 			else
-				throw UnknownFileTypeException(pszFilename);
+				throwException(UnknownFileTypeException, pszFilename);
 		}
 		catch (IException& rException)
 		{
+			_error("%s", rException.toString().c_str());
+
 			MessageBoxA(this->m_hWnd, rException.toString().c_str(), "error", MB_ICONHAND | MB_OK);
 		}
 		catch (...)
 		{
+			_error("Unknown error!");
+
 			MessageBox(this->m_hWnd, TEXT("Unknown error!"), TEXT("error"), MB_ICONHAND | MB_OK);
 		}
 
@@ -482,7 +511,7 @@ public:
 	virtual double getRamanWavelength(void) const override
 	{
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		return this->m_pParamsDialog->getRamanWavelength();
 	}
@@ -531,6 +560,8 @@ public:
 
 		try
 		{
+			_debug("loading camera %s", camera.c_str());
+
 			// always clear solution first when connecting camera
 			if (this->m_pCalibrationDialog != nullptr)
 				this->m_pCalibrationDialog->clear();
@@ -544,15 +575,21 @@ public:
 			// load calibration from camera
 			try
 			{
+				_debug("loading calibration");
+
 				// load calibration
 				onLoadCalibration();
 			}
 			catch (IException& rException)
 			{
+				_error("%s", rException.toString().c_str());
+
 				MessageBoxA(getWindowHandle(), rException.toString().c_str(), "error", MB_ICONWARNING | MB_OK);
 			}
 			catch (...)
 			{
+				_error("Failed to import calibration from camera!");
+
 				MessageBoxA(getWindowHandle(), "Failed to import calibration from camera!", "error", MB_ICONWARNING | MB_OK);
 			}
 
@@ -560,11 +597,13 @@ public:
 			auto pCamera = getInstance<CameraManager>()->getCurrentCamera();
 
 			if (pCamera == nullptr)
-				throw NoCameraException();
+				throwException(NoCameraException);
 
 			// check ROI
 			if (pCamera->getROI() > MAX_RECOMMENDED_ROI)
 			{
+				_warning("ROI is above the recommended settings");
+
 				char szTmp[256];
 
 				sprintf_s(szTmp, "ROI is above the recommended settings which may slow down processing time. Do you want to set ROI to the maximum recommended value (%d px) ?", MAX_RECOMMENDED_ROI);
@@ -597,12 +636,16 @@ public:
 		{
 			disconnectCamera();
 
+			_error("%s", rException.toString().c_str());
+
 			// display error
 			MessageBoxA(NULL, rException.toString().c_str(), "error", MB_ICONHAND | MB_OK);
 		}
 		catch (...)
 		{
 			disconnectCamera();
+
+			_error("Cannot connect to camera!");
 
 			// display error
 			MessageBox(this->m_hWnd, TEXT("Cannot connect to camera!"), TEXT("error"), MB_ICONHAND | MB_OK);
@@ -618,6 +661,8 @@ public:
 	// disconnect camera
 	virtual void disconnectCamera(void) override
 	{
+		_debug("disconnecting camera");
+
 		// reset name
 		SetWindowTextA(getWindowHandle(), APP_NAMEA);
 
@@ -668,7 +713,7 @@ public:
 	virtual bool hasPlotData(size_t nIndex) const override
 	{
 		if (this->m_pPlot == nullptr)
-			throw InvalidPlotException();
+			throwException(InvalidPlotException);
 
 		return this->m_pPlot->series.size() > nIndex;
 	}
@@ -677,7 +722,7 @@ public:
 	virtual const guiSignal& getPlotData(size_t nIndex) const override
 	{
 		if (this->m_pPlot == nullptr)
-			throw InvalidPlotException();
+			throwException(InvalidPlotException);
 
 		return this->m_pPlot->series[nIndex];
 	}
@@ -686,7 +731,7 @@ public:
 	virtual void clearAnnotations(void) override
 	{
 		if (this->m_pPlotBuilder == nullptr)
-			throw InvalidPlotStateException();
+			throwException(InvalidPlotStateException);
 
 		// clear annotations
 		this->m_pPlotBuilder->clearAnnotations();
@@ -700,7 +745,7 @@ public:
 	virtual size_t addAnnotation(const guiSignal& rSignal) override
 	{
 		if (this->m_pPlotBuilder == nullptr)
-			throw InvalidPlotStateException();
+			throwException(InvalidPlotStateException);
 
 		return this->m_pPlotBuilder->addAnnotation(rSignal);
 	}
@@ -709,7 +754,7 @@ public:
 	virtual guiSignal& getAnnotation(size_t nIndex) const override
 	{
 		if (this->m_pPlotBuilder == nullptr)
-			throw InvalidPlotStateException();
+			throwException(InvalidPlotStateException);
 
 		return this->m_pPlotBuilder->getAnnotation(nIndex);
 	}
@@ -718,7 +763,7 @@ public:
 	virtual guiAxis* getPrimaryHorizontalAxis(void) const override
 	{
 		if (this->m_pPlot == nullptr)
-			throw InvalidPlotException();
+			throwException(InvalidPlotException);
 
 		return &this->m_pPlot->haxis1;
 	}
@@ -727,7 +772,7 @@ public:
 	virtual guiAxis* getPrimaryVerticalAxis(void) const override
 	{
 		if (this->m_pPlot == nullptr)
-			throw InvalidPlotException();
+			throwException(InvalidPlotException);
 
 		return &this->m_pPlot->vaxis1;
 	}
@@ -736,7 +781,7 @@ public:
 	virtual guiAxis* getSecondaryHorizontalAxis(void) const override
 	{
 		if (this->m_pPlot == nullptr)
-			throw InvalidPlotException();
+			throwException(InvalidPlotException);
 
 		return &this->m_pPlot->haxis2;
 	}
@@ -745,7 +790,7 @@ public:
 	virtual guiAxis* getSecondaryVerticalAxis(void) const override
 	{
 		if (this->m_pPlot == nullptr)
-			throw InvalidPlotException();
+			throwException(InvalidPlotException);
 
 		return &this->m_pPlot->vaxis2;
 	}
@@ -792,7 +837,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve smoothing parameter
 		return this->m_pParamsDialog->getSmoothing();
@@ -803,7 +848,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve parameter
 		return this->m_pParamsDialog->getAxisType();
@@ -847,7 +892,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve parameter
 		return this->m_pParamsDialog->getExposure();
@@ -858,7 +903,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve parameter
 		return this->m_pParamsDialog->getGain();
@@ -869,7 +914,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve parameter
 		return this->m_pParamsDialog->getGainDB();
@@ -891,7 +936,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve parameter
 		return this->m_pParamsDialog->getSGolayWindow();
@@ -902,7 +947,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve parameter
 		return this->m_pParamsDialog->getSGolayOrder();
@@ -913,7 +958,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve parameter
 		return this->m_pParamsDialog->getSGolayDerivative();
@@ -924,7 +969,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pParamsDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve parameter
 		return this->m_pParamsDialog->getLogFormat();
@@ -946,7 +991,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pCalibrationDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// retrieve data
 		return this->m_pCalibrationDialog->getSolution();
@@ -957,7 +1002,7 @@ public:
 	{
 		// skip if no param dialog
 		if (this->m_pCalibrationDialog == nullptr)
-			throw InvalidDialogException();
+			throwException(InvalidDialogException);
 
 		// set data
 		this->m_pCalibrationDialog->setSolution(rSolution);
@@ -972,6 +1017,8 @@ public:
 	// drag file
 	void dragFile(HDROP hDrop)
 	{
+		_debug("accepting drag&drop file");
+
 		if (DragQueryFileA(hDrop, ~0, NULL, 0) > 0)
 		{
 			char szBuffer[MAX_PATH];
@@ -1099,6 +1146,8 @@ private:
 	// process copy data message
 	bool processCopyData(HWND hWnd, COPYDATASTRUCT* pData)
 	{
+		_debug("receiving COPYDATASTRUCT data");
+
 		// skip if null
 		if (pData == nullptr)
 			return false;
@@ -1119,6 +1168,8 @@ private:
 	// save data to file
 	void saveToFile(const std::string& rFile, bool bSilentMode = false)
 	{
+		_debug("saving file");
+
 		// skip if no data
 		if (!hasPlot())
 			return;
@@ -1130,6 +1181,8 @@ private:
 
 		if (pFile == nullptr)
 		{
+			_error("Unable to write file!");
+
 			// do not show dialog box in silent mode
 			if (!bSilentMode)
 				MessageBox(this->m_hWnd, TEXT("Unable to write file!"), TEXT("error"), MB_ICONHAND | MB_OK);
@@ -1207,16 +1260,20 @@ private:
 			}
 			// otherelse throw error
 			else
-				throw WrongFileTypeException(rFile);
+				throwException(WrongFileTypeException, rFile);
 		}
 		catch (IException& rException)
 		{
+			_error("%s", rException.toString().c_str());
+
 			// do not show dialog box in silent mode
 			if (!bSilentMode)
 				MessageBoxA(this->m_hWnd, rException.toString().c_str(), "error", MB_ICONHAND | MB_OK);
 		}
 		catch (...)
 		{
+			_error("Error when saving results!");
+
 			// do not show dialog box in silent mode
 			if (!bSilentMode)
 				MessageBox(this->m_hWnd, TEXT("Error when saving results!"), TEXT("error"), MB_ICONHAND | MB_OK);
@@ -1507,6 +1564,8 @@ private:
 	// on close action
 	void onClose(void)
 	{
+		_debug("closing SpectrumAnalyzerApp");
+
 		if (isInMultipleAcquisition())
 			this->m_pMultipleAcquisitionDialog->close();
 
@@ -1579,16 +1638,24 @@ private:
 	// clipboard action
 	void onClipboard(void)
 	{
+		_debug("copying data to clipboard");
+
 		if (this->m_pPlot == nullptr)
 			return;
 
 		if (OpenClipboard(NULL) == 0)
+		{
+			_error("Cannot open clipboard!");
+
 			return;
+		}
 
 		EmptyClipboard();
 
 		if (this->m_pPlot->series.size() < 1)
 		{
+			_error("no data to export!");
+
 			CloseClipboard();
 
 			return;
@@ -1632,6 +1699,8 @@ private:
 
 		if (hMemory == 0)
 		{
+			_error("cannot allocate memory for clipboard!");
+
 			CloseClipboard();
 
 			return;
@@ -1704,6 +1773,8 @@ private:
 				if (pDialog != nullptr)
 					pDialog->destroy();
 
+				_error("%s", rException.toString().c_str())
+
 				// display error message
 				MessageBoxA(this->m_hWnd, rException.toString().c_str(), "error", MB_ICONHAND | MB_OK);
 
@@ -1722,6 +1793,8 @@ private:
 				if(pDialog != nullptr)
 					pDialog->destroy();
 
+				_error("No camera found!");
+
 				// display error message
 				MessageBox(this->m_hWnd, TEXT("No camera found!"), TEXT("error"), MB_ICONHAND | MB_OK);
 
@@ -1734,6 +1807,8 @@ private:
 		}
 		catch (...)
 		{
+			_error("Unknown error!");
+
 			// uncheck button
 			SendMessage(GetDlgItem(this->m_hWnd, IDC_TOOLBAR), TB_CHECKBUTTON, (WPARAM)IDM_CONNECT, (LPARAM)FALSE);
 		}
@@ -1767,7 +1842,7 @@ private:
 				break;
 
 			default:
-				throw UnknownLogFormatException();
+				throwException(UnknownLogFormatException);
 			}
 
 			// build file path
@@ -1854,10 +1929,14 @@ private:
 		}
 		catch (IException& rException)
 		{
+			_error("%s", rException.toString().c_str());
+
 			MessageBoxA(this->m_hWnd, rException.toString().c_str(), "error", MB_ICONHAND | MB_OK);
 		}
 		catch (...)
 		{
+			_error("Cannot start acquisition!");
+
 			MessageBox(this->m_hWnd, TEXT("Cannot start acquisition!"), TEXT("error"), MB_ICONHAND | MB_OK);
 		}
 
@@ -1871,6 +1950,8 @@ private:
 	// single image acquisition action
 	void onSingleAcquisition(void)
 	{
+		_debug("acquiring spectra");
+
 		// create dialog
 		auto pDialog = startAcquisition<wndSingleImageAcquisitionDialog>(SELF(SpectrumAnalyzerApp::onSingleAcquisitionStop), SELF(SpectrumAnalyzerApp::onSingleAcquisitionUpdate));
 
@@ -1896,6 +1977,8 @@ private:
 		// start acquisition on click
 		if (bEnable)
 		{
+			_debug("starting live mode");
+
 			// create dialog
 			auto pDialog = startAcquisition<wndMultipleImageAcquisitionDialog>(SELF(SpectrumAnalyzerApp::onMultipleAcquisitionStop), SELF(SpectrumAnalyzerApp::onMultipleAcquisitionUpdate));
 
@@ -1916,6 +1999,8 @@ private:
 		// stop acquisition
 		else
 		{
+			_debug("stopping live mode");
+
 			// stop acquisition
 			if (this->m_pMultipleAcquisitionDialog != nullptr)
 				this->m_pMultipleAcquisitionDialog->close();
@@ -1943,6 +2028,8 @@ private:
 	// set blank action
 	void onSetBlank(void)
 	{
+		_debug("blank data set");
+
 		// set blank
 		if (this->m_pPlotBuilder != nullptr)
 			this->m_blank = this->m_pPlotBuilder->getBlankData();
@@ -1955,6 +2042,8 @@ private:
 	// clear blank action
 	void onClearBlank(void)
 	{
+		_debug("blank data cleared");
+
 		// clear blank
 		if (this->m_pPlotBuilder != nullptr)
 			this->m_blank.clear();
@@ -2035,11 +2124,13 @@ private:
 	// load calibration from camera
 	void onLoadCalibration(void)
 	{
+		_debug("loading calibration");
+
 		// get camera
 		auto pCamera = getInstance<CameraManager>()->getCurrentCamera();
 
 		if (pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		// get calibration data
 		struct calibration_data_s data;
@@ -2048,14 +2139,14 @@ private:
 
 		// verify ident
 		if (data.usIdent != 0xCADA)
-			throw NoCalibrationImported();
+			throwException(NoCalibrationImported);
 
 		// verify checksum
 		unsigned char ucOldChecksum = data.ucChecksum;
 		data.ucChecksum = 0;
 
 		if(ucOldChecksum != checksum8((unsigned char*)&data, sizeof(data)))
-			throw NoCalibrationImported();
+			throwException(NoCalibrationImported);
 
 		// convert to doubles
 		std::array<double, 4> coeffs;
@@ -2070,6 +2161,8 @@ private:
 	// upload calibration to camera
 	void onUploadCalibration(void)
 	{
+		_debug("uploading calibration");
+
 		// skip if no solution
 		if (!hasCalibrationData())
 			return;
@@ -2078,7 +2171,7 @@ private:
 		auto pCamera = getInstance<CameraManager>()->getCurrentCamera();
 
 		if (pCamera == nullptr)
-			throw NoCameraException();
+			throwException(NoCameraException);
 
 		// retrieve solution
 		auto coeffs = getSolution();
@@ -2155,7 +2248,7 @@ private:
 		auto pCalibration = container.get("", "calibration");
 
 		if (pCalibration == nullptr)
-			throw NoCalibrationInFileException(szFilename);
+			throwException(NoCalibrationInFileException, szFilename);
 
 		// load calibration
 		storage_vector<double> calibration;
@@ -2183,6 +2276,8 @@ private:
 			// check UID
 			if (pCamera != nullptr && pCamera->uid() != uid)
 			{
+				_warning("Imported file was not calibrated using the same camera");
+
 				// ask user if he wants to continue
 				if (MessageBox(getWindowHandle(), TEXT("Imported file was not calibrated using the same camera and may therefore yield incorrect results. Import calibration anyway ?"), TEXT("calibration"), MB_ICONWARNING | MB_YESNO) == IDNO)
 					return;
@@ -2540,7 +2635,7 @@ private:
 
 			// get data
 			if (!GetDIBits(hBufferDC, hBufferBitmap, 0, (WORD)infoheader.biHeight, pbData, &bmp_info, DIB_RGB_COLORS))
-				throw ImageSaveException();
+				throwException(ImageSaveException);
 
 			// write file
 			fwrite(&fileheader, sizeof(BITMAPFILEHEADER), 1, pFile);

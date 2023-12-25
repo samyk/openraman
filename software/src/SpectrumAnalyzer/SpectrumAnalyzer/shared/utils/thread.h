@@ -95,7 +95,7 @@ public:
 
 		// trigger exception if thread is null (e.g. thread has already been stopped)
 		if (this->m_hThread == NULL)
-			throw InvalidThreadException();
+			throwException(InvalidThreadException);
 
 		// wait for thread completion
 		if (WaitForSingleObject(this->m_hThread, (DWORD)(THREAD_CLOSE_TIMEOUT_DELAY * 1000.0)) != WAIT_OBJECT_0)

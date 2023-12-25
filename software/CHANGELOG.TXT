@@ -1,0 +1,3 @@
+SpectrumAnalyzer v1.0.1:
+	- changed toolbar icons bug on Windows 7
+	- added support for evemon.exe

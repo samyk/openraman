@@ -84,7 +84,7 @@ public:
 	{
 		// throw exception if no window, should never happen
 		if (this->m_hWnd == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// show or hide dialog
 		ShowWindow(this->m_hWnd, bShow ? TRUE : FALSE);
@@ -95,7 +95,7 @@ public:
 	{
 		// throw exception if no window, should never happen
 		if (this->m_hWnd == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// return true if dialog is visible
 		return IsWindowVisible(this->m_hWnd) == TRUE;
@@ -106,7 +106,7 @@ public:
 	{
 		// throw exception if no window, should never happen
 		if (this->m_hWnd == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		// send close message to dialog
 		SendMessage(this->m_hWnd, WM_CLOSE, (WPARAM)0, (LPARAM)0);
@@ -128,7 +128,7 @@ public:
 	HWND getItemHandle(int iItemID) const
 	{
 		if (this->m_hWnd == NULL)
-			throw NoWindowException();
+			throwException(NoWindowException);
 
 		return GetDlgItem(this->m_hWnd, iItemID);
 	}
@@ -189,7 +189,7 @@ public:
 
 		// throw exception if dialog is not registered
 		if (it == this->m_catalog.end())
-			throw UnknownDialogException(hWnd);
+			throwException(UnknownDialogException, hWnd);
 
 		// return FALSE (default procedure) is dialog was destroyed
 		if (it->second == nullptr)
@@ -220,7 +220,7 @@ template<class Type> std::shared_ptr<Type> createDialog(HWND hParentWnd, HINSTAN
 
 	// throw error in case of issues
 	if (pDialog == nullptr)
-		throw InvalidDialogException();
+		throwException(InvalidDialogException);
 
 	// register dialog to dialog manager
 	getInstance<DialogsManager>()->registerDialog(pDialog->getWindowHandle(), pDialog);

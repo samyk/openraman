@@ -151,21 +151,21 @@ public:
 			return;
 
 		if (rContainer.getTypeName() != getClassName())
-			throw WrongTypeException();
+			throwException(WrongTypeException);
 
 		for (size_t i = 0; i < nNumElements; i++)
 		{
 			if (!pStorageList[i].bIsObject)
 			{
 				if (!rContainer.readVariable(pStorageList[i].szOwner, pStorageList[i].szName, pStorageList[i].szType, pStorageList[i].nBytesSize, (void*)__ADDRESS((unsigned char*)pBasePtr, pStorageList[i].nBaseOffset)))
-					throw UnknownVarException();
+					throwException(UnknownVarException);
 			}
 			else
 			{
 				auto pSubContainer = rContainer.getSubObject(pStorageList[i].szOwner, pStorageList[i].szName);
 
 				if (pSubContainer == nullptr)
-					throw UnknownVarException();
+					throwException(UnknownVarException);
 
 				IStoreableObject *pSubObject = ((IStoreableObject*)__ADDRESS((unsigned char*)pBasePtr, __ADD(pStorageList[i].nBaseOffset, pStorageList[i].nObjectBaseOffset)));
 

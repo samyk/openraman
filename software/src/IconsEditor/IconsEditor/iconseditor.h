@@ -97,6 +97,7 @@ public:
 		this->m_selection = ListViewControl(getItemHandle(IDC_SELECTION));
 		this->m_list = ListViewControl(getItemHandle(IDC_LIST));
 
+		SendMessageA(getItemHandle(IDC_ICONSIZE), CB_ADDSTRING, (WPARAM)0, (LPARAM)"8x8");
 		SendMessageA(getItemHandle(IDC_ICONSIZE), CB_ADDSTRING, (WPARAM)0, (LPARAM)"16x16");
 		SendMessageA(getItemHandle(IDC_ICONSIZE), CB_ADDSTRING, (WPARAM)0, (LPARAM)"24x24");
 		SendMessageA(getItemHandle(IDC_ICONSIZE), CB_ADDSTRING, (WPARAM)0, (LPARAM)"32x32");
@@ -297,6 +298,9 @@ public:
 		// load file
 		this->m_icons.loadFromFile(pszFilename);
 
+		// set icon size
+		setIconSize(this->m_icons.getIconSizeEnum());
+
 		// update
 		notify(EVENT_UPDATE);
 	}
@@ -314,16 +318,20 @@ public:
 	{
 		switch (eIconSize)
 		{
-		case IconSize::_16x16:
+		case IconSize::_8x8:
 			SendMessage(getItemHandle(IDC_ICONSIZE), CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
 			break;
 
-		case IconSize::_24x24:
+		case IconSize::_16x16:
 			SendMessage(getItemHandle(IDC_ICONSIZE), CB_SETCURSEL, (WPARAM)1, (LPARAM)0);
 			break;
 
-		case IconSize::_32x32:
+		case IconSize::_24x24:
 			SendMessage(getItemHandle(IDC_ICONSIZE), CB_SETCURSEL, (WPARAM)2, (LPARAM)0);
+			break;
+
+		case IconSize::_32x32:
+			SendMessage(getItemHandle(IDC_ICONSIZE), CB_SETCURSEL, (WPARAM)3, (LPARAM)0);
 			break;
 
 		case IconSize::_48x48:
@@ -331,7 +339,7 @@ public:
 			break;
 
 		default:
-			throw UnsupportedIconSize();
+			throwException(UnsupportedIconSize);
 		}
 
 		notify(EVENT_SIZE);
@@ -345,19 +353,22 @@ public:
 		switch (sel)
 		{
 		case 0:
-			return IconSize::_16x16;
+			return IconSize::_8x8;
 
 		case 1:
-			return IconSize::_24x24;
+			return IconSize::_16x16;
 
 		case 2:
-			return IconSize::_32x32;
+			return IconSize::_24x24;
 
 		case 3:
+			return IconSize::_32x32;
+
+		case 4:
 			return IconSize::_48x48;
 		}
 
-		throw UnsupportedIconSize();
+		throwException(UnsupportedIconSize);
 	}
 
 	// set current mnemonic
@@ -818,10 +829,18 @@ private:
 	// size action
 	void onSize(void)
 	{
-		if (!this->m_icons.empty() && MessageBox(getWindowHandle(), TEXT("Changing size may affect some of the icons that have already been added. Proceed anyway?"), TEXT("icon size"), MB_ICONASTERISK | MB_YESNO) == IDYES)
+		if (this->m_icons.empty())
+			return;
+
+		auto eNewSize = getIconSize();
+
+		if (this->m_icons.getIconSizeEnum() == eNewSize)
+			return;
+
+		if (MessageBox(getWindowHandle(), TEXT("Changing size may affect some of the icons that have already been added. Proceed anyway?"), TEXT("icon size"), MB_ICONASTERISK | MB_YESNO) == IDYES)
 		{
 			// change icon size
-			this->m_icons.resize(getIconSize());
+			this->m_icons.resize(eNewSize);
 
 			// notify update event to redraw all icons
 			notify(EVENT_UPDATE);

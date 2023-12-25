@@ -90,7 +90,7 @@ template<typename Type> decltype(auto) getInstance(void)
 	auto pInstance = Type::getInstance();
 
 	if (pInstance == nullptr)
-		throw NoSingletonException(typeid(Type).name());
+		throwException(NoSingletonException, typeid(Type).name());
 
 	return pInstance;
 }

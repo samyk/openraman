@@ -222,7 +222,7 @@ template<typename Type, size_t N> std::array<Type, N> vector2array(const std::ve
 			size_t m_nSize1, m_nSize2;
 		};
 
-		throw WrongSizeException(typeid(Type).name(), rVector.size(), N);
+		throwException(WrongSizeException, typeid(Type).name(), rVector.size(), N);
 	}
 
 	// create copy
@@ -323,5 +323,4 @@ static auto splitFileParts(std::string sFilename)
 
 	// return result
 	return ret_s;
-
 }

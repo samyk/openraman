@@ -94,7 +94,7 @@ public:
 		auto pSubObject = std::make_shared<StorageObject>(rOwnerName, rVarName);
 
 		if (pSubObject == nullptr)
-			throw MemoryAllocationException(sizeof(StorageObject));
+			throwException(MemoryAllocationException, sizeof(StorageObject));
 
 		this->m_pChildren.emplace_back(pSubObject);
 
@@ -115,7 +115,7 @@ public:
 		s.pData = malloc(s.nBytesSize);
 
 		if (s.pData == nullptr)
-			throw MemoryAllocationException(s.nBytesSize);
+			throwException(MemoryAllocationException, s.nBytesSize);
 
 		memcpy(s.pData, pData, s.nBytesSize);
 
@@ -338,13 +338,13 @@ public:
 
 		// get vars buffer
 		if (__SIZE_T(pHeader->vars.nSize) != __MULT(sizeof(struct pack_var_s), __SIZE_T(pHeader->nNumVars)))
-			throw BufferReadException();
+			throwException(BufferReadException);
 
 		auto pVars = rBuffer.ptr<struct pack_var_s>(__SIZE_T(pHeader->vars.nOffset), __SIZE_T(pHeader->vars.nSize));
 
 		// get children
 		if (__SIZE_T(pHeader->children.nSize) != __MULT(sizeof(struct pack_child_s), __SIZE_T(pHeader->nNumChildren)))
-			throw BufferReadException();
+			throwException(BufferReadException);
 
 		auto pChildren = rBuffer.ptr<struct pack_child_s>(__SIZE_T(pHeader->children.nOffset), __SIZE_T(pHeader->children.nSize));
 
@@ -382,7 +382,7 @@ public:
 			auto pSubObject = createSubObject(__ADDRESS(pStrings, __SIZE_T(curr.nOwnerOfs)), __ADDRESS(pStrings, __SIZE_T(curr.nNameOfs)));
 
 			if(__SIZE_T(__ADD(curr.nDataOfs, curr.nSize)) > __SIZE_T(pHeader->data.nSize))
-				throw BufferReadException();
+				throwException(BufferReadException);
 
 			StorageBuffer temp_buffer;
 
@@ -451,13 +451,13 @@ private:
 	void assert_string(const char *pBase, size_t nOffset, size_t nMaxSize)
 	{
 		if (nOffset >= nMaxSize)
-			throw BufferReadException();
+			throwException(BufferReadException);
 
 		const char *p = __ADDRESS(pBase, nOffset);
 
 		while (*(p++) != '\0')
 			if (nOffset++ > nMaxSize)
-				throw BufferReadException();
+				throwException(BufferReadException);
 	}
 
 	std::string m_sOwnerName;

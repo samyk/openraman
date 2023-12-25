@@ -32,7 +32,7 @@ template<typename Type1, typename Type2> Type1 safe_cast(const Type2 value)
     auto ret = (Type1)value;
 
     if ((Type2)ret != value)
-        throw SafeCastException();
+        throwException(SafeCastException);
 
     return ret;
 }
@@ -94,7 +94,7 @@ DEFINE_UINT_MAXVAL(unsigned long long, ULLONG_MAX)
 template<typename Type> Type safe_add(const Type val_a, const Type val_b)
 {
     if (val_a >= unsigned_max_val<Type>() - val_b)
-        throw SafeAddException();
+        throwException(SafeAddException);
     
     return val_a + val_b;
 }
@@ -115,7 +115,7 @@ public:
 template<typename Type> Type safe_sub(const Type val_a, const Type val_b)
 {
     if (val_a < val_b)
-        throw SafeAddException();
+        throwException(SafeSubtractException);
 
     return val_a - val_b;
 }
@@ -147,7 +147,7 @@ template<typename Type> Type safe_mult(const Type val_a, const Type val_b)
     };
 
     if (countbits(val_a) + countbits(val_b) > 8 * sizeof(Type))
-        throw SafeMultiplicationException();
+        throwException(SafeMultiplicationException);
 
     return val_a * val_b;
 }
@@ -168,7 +168,7 @@ public:
 template<typename Type> Type* safe_address(const Type *pBase, const uintptr_t nOffset)
 {
     if ((uintptr_t)pBase >= UINTPTR_MAX - nOffset)
-        throw SafeAddressException();
+        throwException(SafeAddressException);
 
     return (Type*)((unsigned char*)pBase + nOffset);
 }
