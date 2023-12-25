@@ -1,0 +1,39 @@
+Supplier,Ref,Label,Qty, Price , Price Tot 
+Thorlabs,KM100,"Kinematic Mirror Mount for Ø1"" Optics",3, € 36.23 , € 108.69 
+Thorlabs,ER3-P4,"Cage Assembly Rod, 3"" Long, Ø6 mm, 4 Pack",1, € 23.48 , € 23.48 
+Thorlabs,ER1,"Cage Assembly Rod, 1"" Long, Ø6 mm",2, € 4.73 , € 9.46 
+Thorlabs,ER1.5,"Cage Assembly Rod, 1.5"" Long, Ø6 mm",2, € 5.48 , € 10.96 
+Thorlabs,PF10-03-G01,"Ø1"" Protected Aluminum Mirror",1, € 48.70 , € 48.70 
+Thorlabs,DMLP550,"Ø1"" Longpass Dichroic Mirror, 550 nm Cut-On",1, € 166.24 , € 166.24 
+Thorlabs,CP02B,30 mm Cage Mounting Bracket,2, € 13.58 , € 27.16 
+Thorlabs,CP35/M,"30 mm Cage Plate with Ø1"" Double Bore, M4 Tap",2, € 16.98 , € 33.96 
+Thorlabs,FMP1/M,"Fixed Ø1"" Mirror Mount, M4 Tap",2, € 15.54 , € 31.08 
+Thorlabs,FELH0550,"Ø25.0 mm Premium Longpass Filter, Cut-On Wavelength: 550 nm",1, € 158.37 , € 158.37 
+Thorlabs,WG11050-A,"Ø1"" N-BK7 Broadband Precision Window, AR Coated: 350 - 700 nm, t = 5 mm",1, € 85.33 , € 85.33 
+Thorlabs,CP14/M,"30 mm Cage Plate with Ø1/2"" Double Bore, M4 Tap",1, € 21.22 , € 21.22 
+Thorlabs,AC127-019-A,"f = 19.0 mm, Ø1/2"" Achromatic Doublet, ARC: 400 - 700 nm",1, € 50.17 , € 50.17 
+Thorlabs,CRM1/M,"Cage Rotation Mount for Ø1"" Optics, SM1 Threaded, M4 Tap",1, € 79.44 , € 79.44 
+Thorlabs,S30RD,"Ø1"" Mounted Slit, 30 ± 2 µm Wide, 3 mm Long",1, € 97.40 , € 97.40 
+Thorlabs,AC254-050-A,"f = 50.0 mm, Ø1"" Achromatic Doublet, ARC: 400 - 700 nm",1, € 73.77 , € 73.77 
+Thorlabs,GR25-1205,"Ruled Reflective Diffraction Grating, 1200/mm, 500 nm Blaze, 25 x 25 x 6 mm",1, € 106.23 , € 106.23 
+Thorlabs,MVL50M23,"50 mm EFL, f/2.8, for 2/3"" C-Mount Format Cameras, with Lock",1, € 192.80 , € 192.80 
+Thorlabs,SS4MN4,"M4 x 0.7 Nylon-Tipped Setscrew, 4 mm Long, 10 Pack",0.3, € 11.14 , € 3.34 
+Thorlabs,SH4MS06,"M4 x 0.7 Stainless Steel Cap Screw, 6 mm Long, 50 Pack",0.06, € 6.24 , € 0.37 
+Thorlabs,SH4MS10,"M4 x 0.7 Stainless Steel Cap Screw, 10 mm Long, 50 Pack",0.12, € 6.49 , € 0.78 
+Thorlabs,SH4MS12,"M4 x 0.7 Stainless Steel Cap Screw, 12 mm Long, 50 Pack",0.34, € 6.74 , € 2.29 
+Thorlabs,W8S038,"#8 Washer, M4 Compatible, Stainless Steel, 100 Pack",0.03, € 3.26 , € 0.10 
+Thorlabs,SH3M8,"M3 x 0.5 Alloy Steel Cap Screw, 8 mm Long, 50 Pack",0.12, € 7.52 , € 0.90 
+Thorlabs,TR75/M,"Ø12.7 mm Optical Post, SS, M4 Setscrew, M6 Tap, L = 75 mm",4, € 5.07 , € 20.28 
+FLIR,BFLY-PGE-31S4M-C,Blackfly 3.2 MP Mono GigE PoE (Sony IMX265),1, € 379.00 , € 379.00 
+FLIR,ACC-01-9011,"12V, 18W, Power Supply with Hirose HR10 Circular Connector",1, € 40.00 , € 40.00 
+Materialise,#2020-01/2,Camera Bracket rev2 (POLYAMIDE SLS),1, € 15.61 , € 15.61 
+Materialise,#2020-02/2,Base Plate rev2 (POLYAMIDE SLS),1, € 93.22 , € 93.22 
+Materialise,#2020-03/2,Cover rev2 (POLYAMIDE FMJ),1, € 86.30 , € 86.30 
+Materialise,#2020-15/1,Grating Holder rev1 (POLYAMIDE SLS),1, € 15.51 , € 15.51 
+Materialize,#2021-01/0,Cables Flexure rev0 (POLYAMIDE FMJ),1, € 14.45 , € 14.45 
+V-Coil,,Helicoils kit M4×1.5D,1, € 25.00 , € 25.00 
+V-Coil,,Helicoils kit M3×1.5D,1, € 25.00 , € 25.00 
+-,#2020-18/1,Laser Assembly (rev1),1, € 521.35 , € 521.35 
+-,#2020-19/2,Laser & TEC Driver (rev2),1, € 489.82 , € 489.82 
+SAM,,"DIN 912 8-32X3/8""",2, € 0.50 , € 1.00 
+DIGIKEY,732-10501-ND ,HEX STANDOFF M4X0.7 STEEL 55MM ,6, € 0.71 , € 4.26 

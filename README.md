@@ -10,11 +10,13 @@ I am not the author of the project but wanted a way to track and contribute upda
 - [software](software) - contains the spectrum analyzer suite, originally [r105](https://www.thepulsar.be/files/Spectrum%20Analyzer%20Suite%20r105.zip) and updated to [r123 (v1.0.1)](https://www.thepulsar.be/files/Spectrum%20Analyzer%20Suite%20r123.zip)
   - note you'll need the FLIR Spinnaker SDK v2.0.0.147 ([32-bit version](https://www.thepulsar.be/files/SpinnakerSDK_FULL_2.0.0.147_x86.exe) or [64-bit version](https://www.thepulsar.be/files/SpinnakerSDK_FULL_2.0.0.147_x64.exe)) per the original site's [software page](https://www.open-raman.org/build/software/)
 
+- spectrometers - note you will also need the bill of materials and a build of both a spectrometer and cuvette
+  - [performance](performance) - STEP files, PDF with assembly, and bill of materials for [rev2](https://www.thepulsar.be/files/performance%20edition%20rev2.zip) of the [performance edition](https://www.open-raman.org/build/performance-edition/) of the spectrometer
 - [cuvettes](cuvettes) - STEP files, PDFs with assembly, and bill of materials
   - [liquid (standard) cuvette](cuvettes/liquid) - from [rev1 zip](https://www.thepulsar.be/files/standard-cuvette-rev1.zip) from [standard cuvette page](https://www.open-raman.org/build/cuvettes/standard-cuvette/)
   - [solid cuvette](cuvettes/solid) - from [rev0 zip](https://www.thepulsar.be/files/solid%20cuvette%20rev0.zip) from [solid cuvette page](https://www.open-raman.org/build/cuvettes/solid-cuvette/)
 
-- [images](images) - images from my own build
+- [images](images) - images from my own build, based off the performance edition optical components in a breadboarded form factor
 [![Raman spectrometer (uncovered)](images/raman1.jpg)](images/raman1.jpg)
 [![Raman spectrometer on (uncovered)](images/raman2.jpg)](images/raman2.jpg)
 [![Raman acetone spectrum](images/ramanacetone.png)](images/ramanacetone.png)
